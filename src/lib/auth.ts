@@ -83,7 +83,9 @@ export async function verifySessionToken(token: string | undefined | null): Prom
 export const cookieOptions = {
     httpOnly: true,
     sameSite: "lax" as const,
-    secure: process.env.NODE_ENV === "production",
+    // فقط وقتی روی HTTPS هستیم secure باشد. پیش‌فرض false تا روی HTTP هم کار کند.
+    // بعد از فعال‌سازی SSL، در .env مقدار COOKIE_SECURE=true را قرار دهید.
+    secure: process.env.COOKIE_SECURE === "true",
     path: "/",
     maxAge: MAX_AGE_SECONDS,
 }

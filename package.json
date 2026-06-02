@@ -8,6 +8,16 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "browserslist": [
+    "> 0.3%",
+    "last 3 versions",
+    "Firefox ESR",
+    "iOS >= 12",
+    "Safari >= 12",
+    "Chrome >= 80",
+    "Edge >= 80",
+    "not dead"
+  ],
   "dependencies": {
     "@tanstack/react-table": "^8.21.3",
     "@tiptap/extension-bubble-menu": "^3.19.0",

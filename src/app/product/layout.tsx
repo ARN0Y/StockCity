@@ -1,14 +1,17 @@
+import { cookies } from "next/headers"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
 import { listCategories } from "@/lib/db"
 import { getSiteSettings } from "@/lib/get-site-settings"
+import { AUTH_COOKIE, verifySessionToken } from "@/lib/auth"
 
 export const dynamic = "force-dynamic"
 
-export default function ProductDetailLayout({ children }: { children: React.ReactNode }) {
+export default async function ProductDetailLayout({ children }: { children: React.ReactNode }) {
     const s = getSiteSettings()
     const categories = listCategories().map((c) => ({ name: c.name, slug: c.slug }))
+    const isLoggedIn = !!(await verifySessionToken((await cookies()).get(AUTH_COOKIE)?.value))
 
     return (
         <div className="flex flex-col min-h-screen bg-muted/40">
@@ -16,6 +19,7 @@ export default function ProductDetailLayout({ children }: { children: React.Reac
                 <AnnouncementBar text={s.announcementText} link={s.announcementLink || undefined} />
             )}
             <Header
+                isLoggedIn={isLoggedIn}
                 categories={categories}
                 contact={{
                     nameFa: s.nameFa,

@@ -1,11 +1,20 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Vazirmatn } from "next/font/google"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider"
 import { siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
-const vazir = Vazirmatn({ subsets: ["arabic", "latin"] })
+const vazir = Vazirmatn({ subsets: ["arabic", "latin"], display: "swap" })
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+        { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    ],
+}
 
 export const metadata: Metadata = {
     metadataBase: new URL(siteConfig.url),

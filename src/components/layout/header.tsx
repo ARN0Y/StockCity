@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useState, useEffect, useRef, useCallback } from "react"
-import { Search, Menu, Phone, Zap, MessageCircle, Loader2, X, Home, Package, Info, MapPin } from "lucide-react"
+import { Search, Menu, Phone, Zap, MessageCircle, Loader2, X, Home, Package, Info, MapPin, LayoutDashboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -32,7 +32,15 @@ const FALLBACK_CONTACT: HeaderContact = {
     warrantyBrand: siteConfig.warrantyBrand,
 }
 
-export function Header({ contact, categories = [] }: { contact?: HeaderContact; categories?: NavCategory[] }) {
+export function Header({
+    contact,
+    categories = [],
+    isLoggedIn = false,
+}: {
+    contact?: HeaderContact
+    categories?: NavCategory[]
+    isLoggedIn?: boolean
+}) {
     const cfg = contact ?? FALLBACK_CONTACT
     const router = useRouter()
     const pathname = usePathname()
@@ -127,6 +135,17 @@ export function Header({ contact, categories = [] }: { contact?: HeaderContact; 
                         <span>گارانتی تعویض محصولات {cfg.warrantyBrand}</span>
                     </div>
                     <div className="flex items-center gap-3">
+                        {isLoggedIn && (
+                            <>
+                                <Link
+                                    href="/admin/dashboard"
+                                    className="flex items-center gap-1 text-primary hover:text-primary/80 font-bold transition-colors"
+                                >
+                                    <LayoutDashboard className="w-3 h-3" /> ورود به داشبورد
+                                </Link>
+                                <span className="w-px h-3 bg-slate-700" />
+                            </>
+                        )}
                         <span>{cfg.addressShort}</span>
                         <span className="w-px h-3 bg-slate-700" />
                         <a
@@ -235,7 +254,7 @@ export function Header({ contact, categories = [] }: { contact?: HeaderContact; 
                     <ThemeToggle className="hidden md:inline-flex" />
                     <div className="hidden lg:flex flex-col items-end">
                         <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">مشاوره و فروش</span>
-                        <span className="text-lg font-black font-mono text-foreground leading-none" dir="ltr">
+                        <span className="text-lg font-black text-foreground leading-none" dir="ltr">
                             {cfg.phoneDisplay}
                         </span>
                     </div>

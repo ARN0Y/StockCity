@@ -1,9 +1,11 @@
+import { cookies } from "next/headers"
 import { Header } from "@/components/layout/header"
 import { Sidebar } from "@/components/layout/sidebar"
 import { Footer } from "@/components/layout/footer"
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
 import { listCategories, listBrandsWithCounts } from "@/lib/db"
 import { getSiteSettings } from "@/lib/get-site-settings"
+import { AUTH_COOKIE, verifySessionToken } from "@/lib/auth"
 
 export const dynamic = "force-dynamic"
 
@@ -13,6 +15,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
         .filter((b) => b.product_count > 0)
         .map((b) => ({ name: b.name, slug: b.slug }))
     const s = getSiteSettings()
+    const isLoggedIn = !!(await verifySessionToken((await cookies()).get(AUTH_COOKIE)?.value))
 
     return (
         <div className="flex flex-col min-h-screen bg-muted/40">
@@ -21,6 +24,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
             )}
 
             <Header
+                isLoggedIn={isLoggedIn}
                 categories={categories.map((c) => ({ name: c.name, slug: c.slug }))}
                 contact={{
                     nameFa: s.nameFa,
