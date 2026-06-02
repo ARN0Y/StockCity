@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StockCity — کاتالوگ تجهیزات برق صنعتی
 
-## Getting Started
+فروشگاه آنلاین (کاتالوگ) برای نمایش محصولات برق صنعتی شامل کنتاکتور، کلید اتوماتیک و کلید مینیاتوری،
+همراه با پنل مدیریت کامل.
 
-First, run the development server:
+## امکانات
+
+- نمایش محصولات با جستجو، فیلتر (برند/دسته/موجودی) و مرتب‌سازی
+- صفحه‌ی محصول با گالری تصاویر، مشخصات فنی و مقاله‌ی نقد و بررسی
+- پنل مدیریت: افزودن/ویرایش محصول، مدیریت دسته‌بندی، تنظیمات سایت
+- آپلود و بهینه‌سازی خودکار تصاویر (تبدیل به WebP)
+- ورود/خروج گروهی محصولات با فایل Excel/CSV
+- تم روشن و تاریک
+- دیتابیس داخلی SQLite (بدون نیاز به سرویس خارجی)
+- بهینه‌سازی سئو: متادیتای داینامیک، sitemap و داده‌ساختاریافته
+
+## تکنولوژی‌ها
+
+- Next.js 16 (App Router) + React 19
+- TypeScript + Tailwind CSS + shadcn/ui (Radix)
+- SQLite (better-sqlite3) + Sharp
+
+## اجرای محلی
 
 ```bash
+npm install
+cp .env.example .env.local   # مقادیر را تنظیم کنید
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+سپس [http://localhost:3000](http://localhost:3000) را باز کنید. پنل مدیریت: `/login`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## استقرار روی سرور
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+راهنمای کامل در فایل [DEPLOY.md](./DEPLOY.md) آمده است.

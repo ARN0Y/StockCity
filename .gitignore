@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local sqlite database (regenerated + seeded on first run)
+/data/
+*.db
+*.db-shm
+*.db-wal
+
+# آپلودهای تصویر محصولات (در زمان اجرا ساخته می‌شوند)
+/public/products/*
+!/public/products/README.txt
+
+# editor/local tooling
+/.claude/
