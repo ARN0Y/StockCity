@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next"
-import { Vazirmatn } from "next/font/google"
+import localFont from "next/font/local"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider"
 import { siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
-const vazir = Vazirmatn({ subsets: ["arabic", "latin"], display: "swap" })
+const vazir = localFont({
+    src: "./fonts/Vazirmatn.woff2",
+    display: "swap",
+    weight: "100 900",
+    variable: "--font-vazir",
+})
 
 export const viewport: Viewport = {
     width: "device-width",
