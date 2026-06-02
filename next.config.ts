@@ -1,16 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    // ماژول‌های نیتیو نباید توسط باندلر سرور پردازش شوند.
     serverExternalPackages: ["better-sqlite3", "sharp"],
     experimental: {
         serverActions: {
-            // اجازه‌ی آپلود تصاویر حجیم‌تر در سرور اکشن‌ها.
             bodySizeLimit: "16mb",
         },
     },
     images: {
-        // تصاویر بهینه‌شده محلی از public/products سرو می‌شوند؛ لینک‌های خارجی هم مجازند.
+        // تصاویر محصولات از قبل با Sharp به WebP بهینه شده‌اند، پس بهینه‌سازی دوباره‌ی
+        // Next لازم نیست و فقط روی سرورهای با شبکه‌ی محدود مشکل ایجاد می‌کند. فایل‌ها
+        // مستقیم از public/products سرو می‌شوند.
+        unoptimized: true,
         remotePatterns: [{ protocol: "https", hostname: "**" }],
     },
     reactCompiler: true,
