@@ -12,14 +12,17 @@ async function getSharp() {
     return _sharp!
 }
 
-const PRODUCTS_DIR = path.join(process.cwd(), "public", "products")
+// عکس‌ها در پوشه‌ی uploads (خارج از public) ذخیره می‌شوند و از طریق مسیر /media سرو می‌شوند.
+// دلیل: فایل‌های داخل public فقط هنگام شروع سرور اسکن می‌شوند و عکس‌های آپلودی runtime
+// تا ری‌استارت دیده نمی‌شوند. پوشه‌ی uploads با route handler در لحظه خوانده می‌شود.
+const UPLOADS_DIR = path.join(process.cwd(), "uploads")
 
 const MAX_DIMENSION = 1400
 const THUMB_DIMENSION = 480
 const QUALITY = 80
 
 async function ensureDir() {
-    await fs.mkdir(PRODUCTS_DIR, { recursive: true })
+    await fs.mkdir(UPLOADS_DIR, { recursive: true })
 }
 
 export interface OptimizedImage {
@@ -66,8 +69,8 @@ export async function optimizeAndSaveImage(
     const base = buildBaseName(nameHint)
     const baseName = `${base}.webp`
     const thumbName = `${base}_thumb.webp`
-    const mainPath = path.join(PRODUCTS_DIR, baseName)
-    const thumbPath = path.join(PRODUCTS_DIR, thumbName)
+    const mainPath = path.join(UPLOADS_DIR, baseName)
+    const thumbPath = path.join(UPLOADS_DIR, thumbName)
 
     const buffer = Buffer.isBuffer(input) ? input : Buffer.from(input)
     const sharp = await getSharp()
@@ -86,8 +89,8 @@ export async function optimizeAndSaveImage(
         .toFile(thumbPath)
 
     return {
-        url: `/products/${baseName}`,
-        thumbUrl: `/products/${thumbName}`,
+        url: `/media/${baseName}`,
+        thumbUrl: `/media/${thumbName}`,
         width: mainInfo.width,
         height: mainInfo.height,
         bytes: mainInfo.size,
@@ -96,16 +99,17 @@ export async function optimizeAndSaveImage(
 
 /**
  * حذف فایل تصویر و نسخه‌ی بندانگشتی متناظرش از دیسک.
- * فقط فایل‌های داخل public/products را حذف می‌کند.
+ * فقط فایل‌های داخل پوشه‌ی uploads را حذف می‌کند.
  */
 export async function deleteImageFiles(publicUrl: string): Promise<void> {
-    if (!publicUrl || !publicUrl.startsWith("/products/")) return
+    // فقط فایل‌های داخل /media/ (پوشه‌ی uploads) حذف می‌شوند.
+    if (!publicUrl || !publicUrl.startsWith("/media/")) return
     const fileName = path.basename(publicUrl)
     if (fileName.includes("..") || fileName.includes("/") || fileName.includes("\\")) return
 
-    const mainPath = path.join(PRODUCTS_DIR, fileName)
+    const mainPath = path.join(UPLOADS_DIR, fileName)
     const thumbName = fileName.replace(/(\.[a-z0-9]+)$/i, "_thumb$1")
-    const thumbPath = path.join(PRODUCTS_DIR, thumbName)
+    const thumbPath = path.join(UPLOADS_DIR, thumbName)
 
     await Promise.allSettled([
         fs.unlink(mainPath),
@@ -115,6 +119,6 @@ export async function deleteImageFiles(publicUrl: string): Promise<void> {
 
 /** آدرس نسخه‌ی بندانگشتی را از روی آدرس اصلی می‌سازد. */
 export function toThumbUrl(url: string): string {
-    if (!url || !url.startsWith("/products/")) return url
+    if (!url || !url.startsWith("/media/")) return url
     return url.replace(/(\.[a-z0-9]+)(\?.*)?$/i, "_thumb$1")
 }

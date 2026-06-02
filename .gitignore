@@ -51,8 +51,7 @@ next-env.d.ts
 *.db-wal
 
 # آپلودهای تصویر محصولات (در زمان اجرا ساخته می‌شوند)
-/public/products/*
-!/public/products/README.txt
+/uploads/
 
 # editor/local tooling
 /.claude/

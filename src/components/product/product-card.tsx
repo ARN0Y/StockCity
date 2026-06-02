@@ -17,7 +17,7 @@ interface ProductCardProps {
 
 function toThumb(url?: string) {
     if (!url) return url
-    if (url.startsWith("/products/")) return url.replace(/(\.[a-z0-9]+)$/i, "_thumb$1")
+    if (url.startsWith("/media/")) return url.replace(/(\.[a-z0-9]+)$/i, "_thumb$1")
     return url
 }
 
