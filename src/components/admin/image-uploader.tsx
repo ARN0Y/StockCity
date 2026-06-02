@@ -18,9 +18,11 @@ import { useToast } from "@/hooks/use-toast"
 interface Props {
     value: string[]
     onChange: (images: string[]) => void
+    /** متن برای نام‌گذاری فایل‌ها (مثل کد فنی یا عنوان محصول) */
+    nameHint?: string
 }
 
-export function ImageUploader({ value, onChange }: Props) {
+export function ImageUploader({ value, onChange, nameHint }: Props) {
     const { toast } = useToast()
     const inputRef = useRef<HTMLInputElement | null>(null)
     const [uploading, setUploading] = useState(false)
@@ -39,6 +41,7 @@ export function ImageUploader({ value, onChange }: Props) {
             for (let i = 0; i < list.length; i++) {
                 const fd = new FormData()
                 fd.append("file", list[i])
+                if (nameHint) fd.append("nameHint", nameHint)
                 const res = await uploadProductImage(fd)
                 if (res.success && res.url) {
                     uploaded.push(res.url)
@@ -59,7 +62,7 @@ export function ImageUploader({ value, onChange }: Props) {
             setUploading(false)
             setProgress({ done: 0, total: 0 })
         },
-        [value, onChange, toast],
+        [value, onChange, toast, nameHint],
     )
 
     const onDrop = useCallback(

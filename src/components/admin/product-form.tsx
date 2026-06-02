@@ -334,7 +334,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <ImageUploader value={images} onChange={setImages} />
+                            <ImageUploader value={images} onChange={setImages} nameHint={modelNumber || title} />
                         </CardContent>
                     </Card>
                 </div>

@@ -36,8 +36,11 @@ export async function uploadProductImage(formData: FormData): Promise<UploadResu
             return { success: false, error: "فرمت تصویر پشتیبانی نمی‌شود." }
         }
 
+        // نام‌گذاری فایل بر اساس عنوان/کد محصول (اگر فرستاده شده باشد)
+        const nameHint = String(formData.get("nameHint") || "")
+
         const bytes = new Uint8Array(await file.arrayBuffer())
-        const result = await optimizeAndSaveImage(bytes)
+        const result = await optimizeAndSaveImage(bytes, nameHint)
 
         return { success: true, url: result.url, thumbUrl: result.thumbUrl }
     } catch (e: any) {
