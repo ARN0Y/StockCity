@@ -14,6 +14,13 @@ import { deleteImageFiles } from "@/lib/image"
 
 const PER_PAGE = 12
 
+// با تغییر محصول، کل صفحات عمومی (خانه، لیست، دسته‌ها، صفحه محصول) و پنل تازه می‌شوند
+// تا تصویر/اطلاعات جدید بدون نیاز به ری‌استارت بلافاصله نمایش داده شود.
+function revalidateEverything() {
+    revalidatePath("/", "layout")
+    revalidatePath("/admin/products")
+}
+
 export async function getProducts(page: number, filters?: ProductFilters) {
     const { data, total } = listProducts(page, PER_PAGE, filters ?? {})
     return { data, total, page, perPage: PER_PAGE }
@@ -27,8 +34,7 @@ export async function deleteProduct(id: string) {
             await Promise.allSettled(product.images.map((url) => deleteImageFiles(url)))
         }
         deleteProductById(id)
-        revalidatePath("/admin/products")
-        revalidatePath("/")
+        revalidateEverything()
         return { success: true }
     } catch (e: any) {
         return { success: false, error: e?.message ?? "خطا در حذف محصول" }
@@ -55,8 +61,7 @@ export async function saveProduct(payload: SaveProductPayload, id?: string) {
         } else {
             createProduct(payload)
         }
-        revalidatePath("/admin/products")
-        revalidatePath("/")
+        revalidateEverything()
         return { success: true }
     } catch (e: any) {
         const msg: string = e?.message ?? "خطا در ذخیره محصول"
