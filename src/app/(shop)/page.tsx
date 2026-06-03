@@ -25,9 +25,10 @@ export default async function HomePage() {
     return (
         <div className="space-y-12 sm:space-y-14 pb-12">
             {/* HERO */}
-            <section className="relative overflow-hidden rounded-3xl bg-card border border-border shadow-sm">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--foreground)/0.04)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--foreground)/0.04)_1px,transparent_1px)] bg-[size:26px_26px]" />
-                <div className="absolute -right-24 -top-24 h-[480px] w-[480px] bg-gradient-to-b from-primary/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+            <section className="relative overflow-hidden rounded-3xl border border-border shadow-sm bg-gradient-to-br from-card via-card to-muted/40">
+                {/* درخشش نرم برند در گوشه */}
+                <div className="absolute -right-32 -top-32 h-[520px] w-[520px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+                <div className="absolute -left-20 bottom-0 h-[360px] w-[360px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
                 <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-center px-5 py-12 sm:px-6 sm:py-14 md:px-12 md:py-16">
                     <div className="space-y-7">

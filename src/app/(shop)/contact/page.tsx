@@ -87,7 +87,7 @@ export default function ContactPage() {
                         href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center gap-2 bg-slate-900 hover:bg-primary text-white py-3.5 text-sm font-bold transition-colors"
+                        className="flex items-center justify-center gap-2 bg-slate-900 dark:bg-primary hover:bg-primary dark:hover:bg-primary/90 text-white py-3.5 text-sm font-bold transition-colors"
                     >
                         <Navigation className="w-4 h-4" /> مسیریابی در گوگل مپ
                     </a>
