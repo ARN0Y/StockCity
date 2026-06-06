@@ -26,9 +26,10 @@ export interface SeedProduct {
 /* دسته‌بندی‌ها                                                          */
 export const seedCategories: SeedCategory[] = [
     { slug: "contactor", name: "کنتاکتور", sort_order: 1 },
-    { slug: "contactor-reversing", name: "کنتاکتور اکبند", sort_order: 2 },
+    { slug: "inverter", name: "اینورتر", sort_order: 2 },
     { slug: "miniature", name: "کلید مینیاتوری", sort_order: 3 },
     { slug: "mccb", name: "کلید اتوماتیک", sort_order: 4 },
+    { slug: "misc", name: "کالای متفرقه", sort_order: 5 },
 ]
 
 /* ابزار کمکی ساخت محصول                                                */
@@ -69,7 +70,7 @@ function reversing(code: string, brand: string, amp: string): SeedProduct {
         model_number: code,
         title: `کنتاکتور اکبند ${brand} ${amp}`,
         brandName: brand,
-        categorySlug: "contactor-reversing",
+        categorySlug: "contactor",
         specifications: {
             نوع: "کنتاکتور اکبند (اینترلاک)",
             "جریان نامی": amp,

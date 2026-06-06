@@ -1,7 +1,7 @@
 import Link from "next/link"
 import {
     Database, Box, ShieldCheck, Zap, PenTool,
-    ArrowLeft, Cpu, ToggleRight, SquareStack, Layers,
+    ArrowLeft, Cpu, Gauge, SquareStack, Layers, Boxes,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getProducts } from "@/app/actions/products"
@@ -13,9 +13,10 @@ export const dynamic = "force-dynamic"
 
 const CATEGORY_ICONS: Record<string, typeof Cpu> = {
     contactor: Cpu,
-    "contactor-reversing": ToggleRight,
+    inverter: Gauge,
     miniature: SquareStack,
     mccb: Layers,
+    misc: Boxes,
 }
 
 export default async function HomePage() {

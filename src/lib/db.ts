@@ -118,6 +118,36 @@ function migrate(db: Database.Database) {
             value TEXT NOT NULL DEFAULT ''
         );
     `)
+
+    migrateCategories(db)
+}
+
+/* به‌روزرسانی دسته‌بندی‌ها روی دیتابیس‌های موجود (idempotent) */
+function migrateCategories(db: Database.Database) {
+    const now = new Date().toISOString()
+
+    // «کنتاکتور اکبند» → «اینورتر» (تغییر نام و نامک)
+    const reversing = db
+        .prepare("SELECT id FROM categories WHERE slug = 'contactor-reversing'")
+        .get() as { id: string } | undefined
+    if (reversing) {
+        const inverterExists = db.prepare("SELECT 1 FROM categories WHERE slug = 'inverter'").get()
+        if (inverterExists) {
+            // اگر دسته‌ی inverter از قبل هست، محصولات را منتقل و قدیمی را حذف کن
+            db.prepare("UPDATE products SET category_id = (SELECT id FROM categories WHERE slug='inverter') WHERE category_id = ?").run(reversing.id)
+            db.prepare("DELETE FROM categories WHERE id = ?").run(reversing.id)
+        } else {
+            db.prepare("UPDATE categories SET slug = 'inverter', name = 'اینورتر', sort_order = 2 WHERE id = ?").run(reversing.id)
+        }
+    }
+
+    // افزودن دسته‌ی «کالای متفرقه» در صورت نبود
+    const miscExists = db.prepare("SELECT 1 FROM categories WHERE slug = 'misc'").get()
+    if (!miscExists) {
+        db.prepare(
+            "INSERT INTO categories (id, name, slug, parent_id, sort_order, created_at) VALUES (?,?,?,?,?,?)",
+        ).run(randomUUID(), "کالای متفرقه", "misc", null, 5, now)
+    }
 }
 
 /* درج داده اولیه (فقط وقتی دیتابیس خالی است)                            */
