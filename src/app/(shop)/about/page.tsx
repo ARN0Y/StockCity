@@ -29,7 +29,7 @@ const values = [
 export default function AboutPage() {
     return (
         <div className="max-w-4xl mx-auto space-y-10 py-4">
-            {/* هدر */}
+            
             <section className="relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-card border border-transparent dark:border-border text-white dark:text-foreground p-8 md:p-12">
                 <div className="absolute -left-24 -top-24 h-80 w-80 bg-primary/25 rounded-full blur-[110px]" />
                 <div className="absolute -right-16 bottom-0 h-64 w-64 bg-primary/10 rounded-full blur-[90px]" />
@@ -46,7 +46,7 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* ارزش‌ها */}
+            
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {values.map((v) => (
                     <div key={v.title} className="bg-card border border-border rounded-2xl p-5 hover:shadow-md transition-all">
@@ -59,7 +59,7 @@ export default function AboutPage() {
                 ))}
             </section>
 
-            {/* اطلاعات تماس کوتاه */}
+            
             <section className="bg-card border border-border rounded-2xl p-6 md:p-8">
                 <h2 className="text-xl font-black text-foreground mb-5">اطلاعات تماس</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">

@@ -95,7 +95,7 @@ export function AdminSidebar() {
 
     return (
         <>
-            {/* دسکتاپ */}
+            
             <aside className="hidden lg:flex fixed inset-y-0 right-0 z-30 w-64 flex-col bg-card border-l border-border">
                 <Brand />
                 <NavLinks />
@@ -105,7 +105,7 @@ export function AdminSidebar() {
                 </div>
             </aside>
 
-            {/* موبایل: هدر */}
+            
             <header className="lg:hidden sticky top-0 z-30 flex items-center justify-between h-14 px-4 bg-card border-b border-border">
                 <div className="flex items-center gap-2">
                     <div className="bg-foreground p-1.5 rounded-lg">
@@ -125,7 +125,7 @@ export function AdminSidebar() {
                 </div>
             </header>
 
-            {/* موبایل: کشو */}
+            
             {open && (
                 <div className="lg:hidden fixed inset-0 z-50">
                     <div className="absolute inset-0 bg-black/40 animate-in fade-in" onClick={() => setOpen(false)} />

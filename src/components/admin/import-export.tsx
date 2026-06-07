@@ -163,7 +163,7 @@ export function ImportExport() {
 
                     {!report ? (
                         <div className="space-y-4">
-                            {/* راهنمای فرمت */}
+                            
                             <div className="rounded-xl border border-border overflow-hidden">
                                 <div className="flex items-center gap-2 bg-muted/50 px-4 py-2.5 text-xs font-bold text-foreground">
                                     <Info className="w-4 h-4 text-primary" /> ستون‌های فایل (به همین ترتیب)
@@ -196,7 +196,7 @@ export function ImportExport() {
                                 <FileDown className="w-4 h-4" /> دانلود فایل نمونه (Template)
                             </Button>
 
-                            {/* دراپ‌زون */}
+                            
                             <div
                                 onDragOver={(e) => {
                                     e.preventDefault()

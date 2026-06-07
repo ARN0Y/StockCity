@@ -40,7 +40,7 @@ export default function DashboardPage() {
                 </Link>
             </div>
 
-            {/* آمار */}
+            
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {stats.map((s) => (
                     <div key={s.label} className="bg-card rounded-2xl border border-border p-5">
@@ -56,7 +56,7 @@ export default function DashboardPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {/* آخرین محصولات */}
+                
                 <div className="lg:col-span-2 bg-card rounded-2xl border border-border overflow-hidden">
                     <div className="flex items-center justify-between px-5 py-4 border-b border-border">
                         <h2 className="font-bold text-foreground flex items-center gap-2">
@@ -94,7 +94,7 @@ export default function DashboardPage() {
                     </div>
                 </div>
 
-                {/* دسته‌بندی‌ها */}
+                
                 <div className="bg-card rounded-2xl border border-border overflow-hidden">
                     <div className="flex items-center justify-between px-5 py-4 border-b border-border">
                         <h2 className="font-bold text-foreground flex items-center gap-2">

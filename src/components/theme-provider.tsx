@@ -17,10 +17,8 @@ function getInitialTheme(): Theme {
     try {
         const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
         if (stored === "light" || stored === "dark") return stored
-        // اگر کاربر انتخابی نکرده، از تم سیستم‌عامل پیروی کن
         if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) return "dark"
     } catch {
-        // ignore
     }
     return "light"
 }
@@ -32,7 +30,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setThemeState(getInitialTheme())
     }, [])
 
-    // اگر کاربر دستی انتخاب نکرده باشد، تغییر تم سیستم را زنده دنبال کن
     useEffect(() => {
         if (typeof window === "undefined" || !window.matchMedia) return
         const mq = window.matchMedia("(prefers-color-scheme: dark)")
@@ -51,7 +48,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         try {
             localStorage.setItem(STORAGE_KEY, next)
         } catch {
-            // ignore
         }
         setThemeState(next)
     }

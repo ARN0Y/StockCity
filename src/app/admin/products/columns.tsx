@@ -42,7 +42,6 @@ const statusMap: Record<string, { label: string; className: string; icon: typeof
     },
 }
 
-// تاریخ شمسی کوتاه
 function faDate(iso: string): string {
     if (!iso) return "—"
     try {

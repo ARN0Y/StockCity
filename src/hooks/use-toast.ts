@@ -1,8 +1,7 @@
-// این فایل فقط در صورتی نیاز است که هوک فعلی شما مشکل داشته باشد
 import { useState, useEffect } from "react"
 
 const TOAST_LIMIT = 3
-const TOAST_REMOVE_DELAY = 5000 // زمان پیش‌فرض حذف (اینجا ۵ ثانیه است ولی در کامپوننت هم هندل کردیم)
+const TOAST_REMOVE_DELAY = 5000
 
 type Toast = {
     id: string
@@ -31,7 +30,6 @@ interface State {
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
-// مدیریت استیت به صورت گلوبال (خارج از کامپوننت)
 let memoryState: State = { toasts: [] }
 let listeners: Array<(state: State) => void> = []
 
@@ -52,7 +50,6 @@ function dispatch(action: ActionType) {
                     addToRemoveQueue(toast.id)
                 })
             }
-            // تریگر کردن آپدیت برای حذف ویژوال (اختیاری)
             memoryState = { ...memoryState }
             break
         }
@@ -81,7 +78,7 @@ function addToRemoveQueue(toastId: string) {
     const timeout = setTimeout(() => {
         toastTimeouts.delete(toastId)
         dispatch({ type: "REMOVE_TOAST", toastId: toastId })
-    }, 0) // بلافاصله حذف کن چون انیمیشن را در کامپوننت هندل کردیم
+    }, 0)
 
     toastTimeouts.set(toastId, timeout)
 }

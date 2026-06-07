@@ -7,7 +7,6 @@ export const dynamic = "force-dynamic"
 export default function AdminSettingsPage() {
     const saved = getSettings()
 
-    // مقادیر اولیه: ذخیره‌شده یا پیش‌فرض siteConfig
     const initial: Record<string, string> = {
         nameFa: saved.nameFa ?? siteConfig.nameFa,
         phoneDisplay: saved.phoneDisplay ?? siteConfig.phoneDisplay,

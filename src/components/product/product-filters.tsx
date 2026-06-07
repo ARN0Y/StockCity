@@ -63,7 +63,7 @@ export function ProductFilters({ brands, categories }: Props) {
 
     const clearAll = useCallback(() => {
         const params = new URLSearchParams()
-        if (current.q) params.set("q", current.q) // عبارت جستجو حفظ شود
+        if (current.q) params.set("q", current.q)
         router.push(`${pathname}?${params.toString()}`)
     }, [router, pathname, current.q])
 
@@ -75,7 +75,7 @@ export function ProductFilters({ brands, categories }: Props) {
                     فیلتر
                 </div>
 
-                {/* دسته */}
+                
                 <Select value={current.category || ALL} onValueChange={(v) => setParam("category", v)}>
                     <SelectTrigger className="h-9 min-w-[130px] text-xs"><SelectValue placeholder="دسته‌بندی" /></SelectTrigger>
                     <SelectContent>
@@ -84,7 +84,7 @@ export function ProductFilters({ brands, categories }: Props) {
                     </SelectContent>
                 </Select>
 
-                {/* برند */}
+                
                 <Select value={current.brand || ALL} onValueChange={(v) => setParam("brand", v)}>
                     <SelectTrigger className="h-9 min-w-[130px] text-xs"><SelectValue placeholder="برند" /></SelectTrigger>
                     <SelectContent className="max-h-72">
@@ -93,7 +93,7 @@ export function ProductFilters({ brands, categories }: Props) {
                     </SelectContent>
                 </Select>
 
-                {/* وضعیت موجودی */}
+                
                 <Select value={current.stock || ALL} onValueChange={(v) => setParam("stock", v)}>
                     <SelectTrigger className="h-9 min-w-[120px] text-xs"><SelectValue placeholder="موجودی" /></SelectTrigger>
                     <SelectContent>
@@ -102,7 +102,7 @@ export function ProductFilters({ brands, categories }: Props) {
                     </SelectContent>
                 </Select>
 
-                {/* مرتب‌سازی */}
+                
                 <Select value={current.sort} onValueChange={(v) => setParam("sort", v === "newest" ? null : v)}>
                     <SelectTrigger className="h-9 min-w-[140px] text-xs gap-1">
                         <ArrowDownWideNarrow className="w-3.5 h-3.5 text-muted-foreground" />

@@ -1,13 +1,10 @@
-// احراز هویت سبک و بدون وابستگی خارجی: کوکی امضاشده با HMAC-SHA256.
-// با Web Crypto پیاده شده تا هم در Middleware (Edge) و هم در Server Action (Node) کار کند.
-
 export const AUTH_COOKIE = "sc_session"
 const DEFAULT_SECRET = "stock-city-dev-secret-change-me"
-const MAX_AGE_SECONDS = 60 * 60 * 24 * 7 // یک هفته
+const MAX_AGE_SECONDS = 60 * 60 * 24 * 7
 
 export interface SessionPayload {
-    u: string // نام کاربری
-    exp: number // زمان انقضا (ثانیه)
+    u: string
+    exp: number
 }
 
 function getSecret(): string {
@@ -83,8 +80,6 @@ export async function verifySessionToken(token: string | undefined | null): Prom
 export const cookieOptions = {
     httpOnly: true,
     sameSite: "lax" as const,
-    // فقط وقتی روی HTTPS هستیم secure باشد. پیش‌فرض false تا روی HTTP هم کار کند.
-    // بعد از فعال‌سازی SSL، در .env مقدار COOKIE_SECURE=true را قرار دهید.
     secure: process.env.COOKIE_SECURE === "true",
     path: "/",
     maxAge: MAX_AGE_SECONDS,
@@ -93,6 +88,5 @@ export const cookieOptions = {
 export function checkCredentials(username: string, password: string): boolean {
     const u = process.env.ADMIN_USERNAME || "admin"
     const p = process.env.ADMIN_PASSWORD || "stockcity1404"
-    // مقایسه ساده (مقادیر از env می‌آیند، نه ورودی شبکه‌ای حجیم)
     return username.trim() === u && password === p
 }

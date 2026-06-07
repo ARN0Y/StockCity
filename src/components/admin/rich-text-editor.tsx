@@ -57,7 +57,6 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
     const [uploading, setUploading] = useState(false)
     const [fullscreen, setFullscreen] = useState(false)
 
-    // قفل اسکرول صفحه هنگام تمام‌صفحه
     useEffect(() => {
         if (fullscreen) {
             document.body.style.overflow = "hidden"
@@ -69,7 +68,6 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
         }
     }, [fullscreen])
 
-    // خروج با Esc
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
             if (e.key === "Escape") setFullscreen(false)
@@ -169,7 +167,6 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                 const safeTo = Math.min(to, docSize)
                 editor.commands.setTextSelection({ from: safeFrom, to: safeTo })
             } catch {
-                // ignore
             }
         }
     }, [value, editor])
@@ -220,7 +217,6 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
         )
     }
 
-    // کامپوننت کمکی دکمه تولبار (با Tooltip)
     const ToolBtn = ({
                          icon: Icon,
                          label,
@@ -268,9 +264,9 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                     : "rounded-lg overflow-hidden",
             )}
         >
-            {/* Main Toolbar */}
+            
             <div className="flex flex-wrap items-center gap-0.5 border-b border-border bg-muted/50 backdrop-blur-sm px-2 py-1.5 sticky top-0 z-20">
-                {/* Text Format */}
+                
                 <ToolBtn
                     icon={Bold}
                     label="بولد (Ctrl+B)"
@@ -292,7 +288,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
 
                 <ToolSep />
 
-                {/* Headings */}
+                
                 <ToolBtn
                     icon={Pilcrow}
                     label="پاراگراف ساده"
@@ -326,7 +322,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
 
                 <ToolSep />
 
-                {/* Lists */}
+                
                 <ToolBtn
                     icon={List}
                     label="لیست نقطه‌ای"
@@ -354,7 +350,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
 
                 <ToolSep />
 
-                {/* Alignment */}
+                
                 <ToolBtn
                     icon={AlignRight}
                     label="راست‌چین"
@@ -378,7 +374,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
 
                 <ToolSep />
 
-                {/* Link */}
+                
                 <ToolBtn
                     icon={LinkIcon}
                     label="افزودن لینک"
@@ -400,7 +396,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                     />
                 )}
 
-                {/* Horizontal Rule */}
+                
                 <ToolBtn
                     icon={Minus}
                     label="خط جداکننده افقی"
@@ -409,7 +405,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
 
                 <ToolSep />
 
-                {/* Image Upload */}
+                
                 <Button
                     variant="ghost"
                     size="sm"
@@ -425,7 +421,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                     <span className="hidden sm:inline">تصویر</span>
                 </Button>
 
-                {/* Clear formatting */}
+                
                 <ToolBtn
                     icon={RemoveFormatting}
                     label="پاک کردن فرمت"
@@ -434,7 +430,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                     }
                 />
 
-                {/* Undo / Redo + Fullscreen */}
+                
                 <div className="mr-auto flex items-center gap-0.5">
                     <ToolBtn
                         icon={Undo}
@@ -458,11 +454,10 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                 </div>
             </div>
 
-            {/* Bubble Menu - Floating menu on selection */}
+            
             {editor && (
                 <BubbleMenu
                     editor={editor}
-                    // tippyOptions را حذف کردم چون باعث ارور می‌شد
                     className="bg-slate-900 text-white rounded-lg shadow-xl border border-slate-700 flex items-center gap-0.5 p-1 animate-in zoom-in-95 duration-200"
                 >
                     <button
@@ -497,7 +492,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                 </BubbleMenu>
             )}
 
-            {/* Editor Content Area */}
+            
             <div
                 className={cn(
                     "relative overflow-y-auto bg-card",
@@ -507,7 +502,7 @@ export function RichTextEditor({ value, onChange, disabled }: Props) {
                 <EditorContent editor={editor} />
             </div>
 
-            {/* Footer status bar */}
+            
             <div className="border-t border-border bg-muted/30 px-3 py-1.5 flex items-center justify-between text-[10px] text-muted-foreground font-mono shrink-0">
                 <span>
                     {editor.storage.characterCount?.characters?.() ?? editor.getText().length} کاراکتر

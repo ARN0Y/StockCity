@@ -17,7 +17,6 @@ export async function saveSiteSettings(
     try {
         await assertAdmin()
         setSettings(values)
-        // همه‌ی صفحات سایت (که هدر/فوتر مشترک دارند) تازه‌سازی شوند
         revalidatePath("/", "layout")
         return { success: true }
     } catch (e: any) {

@@ -12,7 +12,6 @@ async function assertAdmin() {
     if (!session) throw new Error("دسترسی غیرمجاز")
 }
 
-// ترتیب ستون‌های فایل CSV
 const HEADERS = [
     "عنوان",
     "کد فنی",
@@ -40,7 +39,6 @@ const STATUS_EN_TO_FA: Record<StockStatus, string> = {
     out_of_stock: "ناموجود",
 }
 
-/** خروجی CSV از همه‌ی محصولات. */
 export async function exportProductsCsv(): Promise<{ filename: string; content: string }> {
     await assertAdmin()
     const products = allProductsForExport()
@@ -52,11 +50,9 @@ export async function exportProductsCsv(): Promise<{ filename: string; content: 
         p.category?.name ?? "",
         STATUS_EN_TO_FA[p.stock_status] ?? "موجود",
         p.stock_quantity ?? "",
-        // مشخصات: «کلید=مقدار | کلید=مقدار»
         Object.entries(p.specifications ?? {})
             .map(([k, v]) => `${k}=${v}`)
             .join(" | "),
-        // ویژگی‌ها: «الف | ب | ج»
         (p.key_features ?? []).join(" | "),
     ])
 
@@ -87,7 +83,6 @@ function parseFeatures(raw: string): string[] {
         .filter(Boolean)
 }
 
-/** ورود گروهی محصولات از محتوای CSV. */
 export async function importProductsCsv(
     csvText: string,
 ): Promise<{ success: boolean; created?: number; updated?: number; skipped?: number; errors?: string[]; error?: string }> {
@@ -98,7 +93,6 @@ export async function importProductsCsv(
             return { success: false, error: "فایل خالی است یا فقط سرستون دارد." }
         }
 
-        // سطر اول هدر است
         const dataRows = table.slice(1)
 
         const rows: ImportRow[] = dataRows.map((cols) => {

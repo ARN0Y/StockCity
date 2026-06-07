@@ -1,6 +1,3 @@
-// داده‌های اولیه فروشگاه استوک سیتی — استخراج‌شده از لیست کالاهای مغازه.
-// این داده‌ها فقط یک‌بار (هنگام خالی بودن دیتابیس) درج می‌شوند و بعداً از پنل ادمین قابل ویرایش‌اند.
-
 export interface SeedCategory {
     slug: string
     name: string
@@ -23,7 +20,6 @@ export interface SeedProduct {
     stock_quantity: number | null
 }
 
-/* دسته‌بندی‌ها                                                          */
 export const seedCategories: SeedCategory[] = [
     { slug: "contactor", name: "کنتاکتور", sort_order: 1 },
     { slug: "inverter", name: "اینورتر", sort_order: 2 },
@@ -32,7 +28,6 @@ export const seedCategories: SeedCategory[] = [
     { slug: "misc", name: "کالای متفرقه", sort_order: 5 },
 ]
 
-/* ابزار کمکی ساخت محصول                                                */
 const slugify = (s: string) =>
     s
         .toLowerCase()
@@ -41,7 +36,6 @@ const slugify = (s: string) =>
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-+|-+$/g, "")
 
-// کنتاکتور
 function contactor(
     code: string,
     brand: string,
@@ -64,7 +58,6 @@ function contactor(
     }
 }
 
-// کنتاکتور اکبند (دارای اینترلاک مکانیکی برای چپگرد/راستگرد)
 function reversing(code: string, brand: string, amp: string): SeedProduct {
     return {
         model_number: code,
@@ -86,7 +79,6 @@ function reversing(code: string, brand: string, amp: string): SeedProduct {
     }
 }
 
-// کلید مینیاتوری
 function miniature(
     code: string,
     brand: string,
@@ -114,7 +106,6 @@ function miniature(
     }
 }
 
-// کلید اتوماتیک (کمپکت)
 function mccb(
     code: string,
     brand: string,
@@ -145,7 +136,6 @@ function mccb(
     }
 }
 
-/* محصولات                                                             */
 const contactors: SeedProduct[] = [
     contactor("1000009", "Schneider", "9A"),
     contactor("1000012", "Schneider", "12A"),
@@ -281,7 +271,6 @@ export const seedProducts: SeedProduct[] = [
     ...mccbs,
 ]
 
-/* برندها به‌صورت خودکار از روی محصولات ساخته می‌شوند */
 export const seedBrands: SeedBrand[] = Array.from(
     new Set(seedProducts.map((p) => p.brandName)),
 )

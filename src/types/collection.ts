@@ -1,5 +1,3 @@
-// تایپ‌های مشترک سمت کلاینت/سرور.
-
 export type StockStatus = "in_stock" | "call_for_price" | "out_of_stock"
 
 export interface Category {

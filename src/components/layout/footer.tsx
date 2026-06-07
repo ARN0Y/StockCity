@@ -30,7 +30,7 @@ export function Footer({ contact }: { contact?: FooterContact }) {
             <div className="container mx-auto px-6 pb-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-                    {/* برند */}
+                    
                     <div className="space-y-4">
                         <h3 className="text-2xl font-black text-white dark:text-foreground tracking-tighter">
                             Stock<span className="text-primary">City</span>
@@ -59,7 +59,7 @@ export function Footer({ contact }: { contact?: FooterContact }) {
                         )}
                     </div>
 
-                    {/* دسترسی سریع */}
+                    
                     <div className="space-y-4">
                         <h4 className="text-lg font-bold text-white dark:text-foreground border-r-4 border-primary pr-3">دسترسی سریع</h4>
                         <ul className="space-y-2 text-sm font-medium">
@@ -72,7 +72,7 @@ export function Footer({ contact }: { contact?: FooterContact }) {
                         </ul>
                     </div>
 
-                    {/* اطلاعات فروشگاه */}
+                    
                     <div className="space-y-4">
                         <h4 className="text-lg font-bold text-white dark:text-foreground border-r-4 border-primary pr-3">اطلاعات فروشگاه</h4>
                         <ul className="space-y-4 text-sm">

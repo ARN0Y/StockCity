@@ -59,12 +59,10 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
     )
     const initialImages = (initialData?.images || []) as string[]
 
-    // افزودن سریع برند
     const [brandAdding, setBrandAdding] = useState(false)
     const [newBrand, setNewBrand] = useState("")
     const [brandLoading, setBrandLoading] = useState(false)
 
-    // افزودن سریع دسته
     const [catAdding, setCatAdding] = useState(false)
     const [newCat, setNewCat] = useState("")
     const [catLoading, setCatLoading] = useState(false)
@@ -101,7 +99,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
             toast({ title: "دسته افزوده شد", description: "لیست به‌روزرسانی شد." })
             setNewCat("")
             setCatAdding(false)
-            router.refresh() // برای گرفتن id دسته‌ی جدید از سرور
+            router.refresh()
         } else {
             toast({ title: "خطا", description: res.error, variant: "destructive" })
         }
@@ -118,7 +116,6 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
         }
         setSaving(true)
 
-        // پاک‌سازی فایل تصاویری که حذف شده‌اند
         const removed = initialImages.filter((url) => !images.includes(url))
         if (removed.length) {
             await Promise.allSettled(removed.map((url) => removeProductImage(url)))
@@ -163,7 +160,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
 
     return (
         <div className="space-y-6">
-            {/* هدر صفحه */}
+            
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <button
@@ -183,7 +180,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
             </div>
 
             <div className="grid grid-cols-12 gap-6 items-start">
-                {/* ستون اصلی */}
+                
                 <div className="col-span-12 lg:col-span-8 space-y-6">
                     <Card className="border-border shadow-none">
                         <CardHeader className="pb-3">
@@ -203,7 +200,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                         </CardContent>
                     </Card>
 
-                    {/* مشخصات فنی */}
+                    
                     <Card className="border-border shadow-none">
                         <CardHeader className="flex flex-row items-center justify-between pb-3">
                             <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
@@ -227,7 +224,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                         </CardContent>
                     </Card>
 
-                    {/* ویژگی‌های کلیدی */}
+                    
                     <Card className="border-border shadow-none">
                         <CardHeader className="pb-3">
                             <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
@@ -240,9 +237,9 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                     </Card>
                 </div>
 
-                {/* ستون کناری */}
+                
                 <div className="col-span-12 lg:col-span-4 space-y-6 lg:sticky lg:top-6">
-                    {/* وضعیت و انتشار */}
+                    
                     <Card className="border-border shadow-none">
                         <CardHeader className="pb-3">
                             <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
@@ -268,7 +265,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                                 </div>
                             )}
 
-                            {/* دسته‌بندی */}
+                            
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <Label className="text-xs text-muted-foreground">دسته‌بندی <span className="text-red-500">*</span></Label>
@@ -296,7 +293,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                                 )}
                             </div>
 
-                            {/* برند */}
+                            
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <Label className="text-xs text-muted-foreground">برند</Label>
@@ -326,7 +323,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                         </CardContent>
                     </Card>
 
-                    {/* تصاویر */}
+                    
                     <Card className="border-border shadow-none">
                         <CardHeader className="pb-3">
                             <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
@@ -340,7 +337,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                 </div>
             </div>
 
-            {/* توضیحات و نقد و بررسی — تمام‌عرض برای فضای بیشتر تولید محتوا */}
+            
             <Card className="border-border shadow-none overflow-hidden">
                 <CardHeader className="pb-3 border-b border-border bg-muted/30">
                     <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">

@@ -14,8 +14,6 @@ import { deleteImageFiles } from "@/lib/image"
 
 const PER_PAGE = 12
 
-// با تغییر محصول، کل صفحات عمومی (خانه، لیست، دسته‌ها، صفحه محصول) و پنل تازه می‌شوند
-// تا تصویر/اطلاعات جدید بدون نیاز به ری‌استارت بلافاصله نمایش داده شود.
 function revalidateEverything() {
     revalidatePath("/", "layout")
     revalidatePath("/admin/products")
@@ -28,7 +26,6 @@ export async function getProducts(page: number, filters?: ProductFilters) {
 
 export async function deleteProduct(id: string) {
     try {
-        // پاک کردن فایل‌های تصویر محصول از دیسک پیش از حذف رکورد.
         const product = getProductById(id)
         if (product?.images?.length) {
             await Promise.allSettled(product.images.map((url) => deleteImageFiles(url)))

@@ -15,11 +15,9 @@ const CONTENT_TYPES: Record<string, string> = {
     ".avif": "image/avif",
 }
 
-// سرو فایل‌های آپلودشده از پوشه‌ی uploads (خارج از public تا در runtime هم سرو شوند)
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ file: string }> }) {
     const { file } = await params
 
-    // جلوگیری از path traversal
     if (!file || file.includes("..") || file.includes("/") || file.includes("\\")) {
         return new Response("Not found", { status: 404 })
     }
@@ -33,7 +31,6 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ fil
         return new Response(new Uint8Array(buf), {
             headers: {
                 "Content-Type": type,
-                // نام فایل‌ها یکتا (هش‌دار) است، پس کش طولانی امن است.
                 "Cache-Control": "public, max-age=31536000, immutable",
             },
         })

@@ -17,7 +17,6 @@ const formatKey = (key: string) => {
     return key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
 }
 
-// متادیتای داینامیک هر محصول برای سئو و پیش‌نمایش در شبکه‌های اجتماعی
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { model } = await params
     const product = getProductByModel(decodeURIComponent(model)) as any
@@ -57,7 +56,6 @@ export default async function ProductPage({ params }: PageProps) {
 
     if (!product) notFound()
 
-    // داده‌ی ساختاریافته‌ی محصول (Schema.org) برای گوگل
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Product",
@@ -81,22 +79,21 @@ export default async function ProductPage({ params }: PageProps) {
     }
 
     return (
-        // کانتینر اصلی صفحه با حداکثر عرض عریض‌تر (1800px) برای نمای صنعتی
         <div className="w-full max-w-[1800px] mx-auto px-4 md:px-6 py-6 animate-in fade-in duration-500 pb-24">
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-            {/* باکس اصلی یکپارچه */}
+            
             <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
 
                 <div className="grid grid-cols-1 lg:grid-cols-12">
-                    {/* گالری تصاویر */}
+                    
                     <div className="lg:col-span-5 xl:col-span-4">
                         <ProductGallery images={product.images || []} title={product.title} />
                     </div>
 
-                    {/* مشخصات و خرید */}
+                    
                     <div className="lg:col-span-7 xl:col-span-8 p-5 sm:p-6 lg:p-10 flex flex-col bg-card">
-                        {/* بردکرامب + کد کالا */}
+                        
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-6 border-b border-border">
                             <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground flex-wrap">
                                 <span>فروشگاه</span>
@@ -111,7 +108,7 @@ export default async function ProductPage({ params }: PageProps) {
                             </div>
                         </div>
 
-                        {/* عنوان و برند */}
+                        
                         <div className="mb-8">
                             <h1 className="text-2xl lg:text-4xl font-black text-foreground leading-tight mb-4">
                                 {product.title}
@@ -133,7 +130,7 @@ export default async function ProductPage({ params }: PageProps) {
                             </div>
                         </div>
 
-                        {/* گرید اطلاعات کلیدی */}
+                        
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6 mb-10">
                             <div className="space-y-3">
                                 <h3 className="text-sm font-bold text-foreground flex items-center gap-2 mb-2">
@@ -169,7 +166,7 @@ export default async function ProductPage({ params }: PageProps) {
 
                         <div className="flex-1" />
 
-                        {/* دکمه‌های خرید (CTA) — موبایل‌امن */}
+                        
                         <div className="mt-6 bg-slate-900 dark:bg-card dark:border dark:border-border rounded-xl p-5 shadow-lg flex flex-col gap-4">
                             <div className="flex items-center justify-between gap-3">
                                 <div className="min-w-0">
@@ -197,7 +194,7 @@ export default async function ProductPage({ params }: PageProps) {
                             </div>
                         </div>
 
-                        {/* آیکون‌های اعتماد */}
+                        
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-6 pt-4 border-t border-border">
                             <div className="flex items-center justify-center gap-2 py-2">
                                 <ShieldCheck className="w-5 h-5 text-muted-foreground" />
@@ -217,7 +214,7 @@ export default async function ProductPage({ params }: PageProps) {
 
                 <Separator className="bg-border h-px" />
 
-                {/* توضیحات کامل */}
+                
                 <div className="bg-muted/40 p-4 sm:p-6 lg:p-10">
                     <div className="max-w-[1100px] mx-auto">
                         <div className="flex items-center gap-3 mb-6">

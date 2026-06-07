@@ -126,7 +126,7 @@ export function Header({
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 shadow-sm">
-            {/* نوار بالایی */}
+            
             <div className="bg-slate-900 text-slate-300 text-[11px] py-1.5 px-4 hidden md:block dark:bg-card dark:border-b dark:border-border">
                 <div className="max-w-[1800px] mx-auto flex justify-between items-center px-4">
                     <div className="flex items-center gap-4">
@@ -161,7 +161,7 @@ export function Header({
             </div>
 
             <div className="max-w-[1800px] mx-auto px-4 h-16 sm:h-20 flex items-center justify-between gap-3 sm:gap-8">
-                {/* منوی موبایل */}
+                
                 <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
                     <SheetTrigger asChild>
                         <Button variant="ghost" size="icon" className="md:hidden shrink-0">
@@ -229,7 +229,7 @@ export function Header({
                     </SheetContent>
                 </Sheet>
 
-                {/* لوگو */}
+                
                 <Link href="/" className="flex items-center gap-2 shrink-0 group">
                     <div className="bg-primary p-2 rounded-lg transition-transform group-hover:scale-110">
                         <Zap className="h-6 w-6 text-white" />
@@ -244,12 +244,12 @@ export function Header({
                     </div>
                 </Link>
 
-                {/* جستجوی دسکتاپ */}
+                
                 <div className="hidden md:flex flex-1 max-w-3xl relative mx-4">
                     {searchField("جستجو (مثال: کنتاکتور اشنایدر)...")}
                 </div>
 
-                {/* تماس + تم */}
+                
                 <div className="flex items-center gap-2 sm:gap-4 shrink-0">
                     <ThemeToggle className="hidden md:inline-flex" />
                     <div className="hidden lg:flex flex-col items-end">
@@ -267,12 +267,12 @@ export function Header({
                 </div>
             </div>
 
-            {/* جستجوی موبایل */}
+            
             <div className="md:hidden border-t border-border bg-background px-4 py-2.5">
                 {searchField("جستجوی محصول...")}
             </div>
 
-            {/* ناوبری دسکتاپ */}
+            
             <div className="border-t border-border hidden md:block bg-background">
                 <div className="max-w-[1800px] mx-auto px-4">
                     <nav className="flex items-center gap-6 text-sm font-bold h-11 text-foreground/80 overflow-x-auto">

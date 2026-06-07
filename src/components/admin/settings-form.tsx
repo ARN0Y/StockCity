@@ -70,7 +70,7 @@ export function SettingsForm({ initial }: Props) {
                 </Button>
             </div>
 
-            {/* نوار اعلان */}
+            
             <Card>
                 <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">
@@ -96,7 +96,7 @@ export function SettingsForm({ initial }: Props) {
                 </CardContent>
             </Card>
 
-            {/* اطلاعات تماس */}
+            
             <Card>
                 <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">
@@ -127,7 +127,7 @@ export function SettingsForm({ initial }: Props) {
                 </CardContent>
             </Card>
 
-            {/* آدرس */}
+            
             <Card>
                 <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">
@@ -146,7 +146,7 @@ export function SettingsForm({ initial }: Props) {
                 </CardContent>
             </Card>
 
-            {/* گارانتی */}
+            
             <Card>
                 <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">
@@ -165,7 +165,7 @@ export function SettingsForm({ initial }: Props) {
                 </CardContent>
             </Card>
 
-            {/* شبکه‌های اجتماعی */}
+            
             <Card>
                 <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">

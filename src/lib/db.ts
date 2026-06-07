@@ -1,7 +1,3 @@
-// لایه دیتابیس داخلی پروژه — SQLite (better-sqlite3).
-// فایل دیتابیس به‌صورت خودکار در مسیر data/stockcity.db ساخته می‌شود؛
-// هیچ سرور یا سرویس خارجی لازم نیست.
-
 import Database from "better-sqlite3"
 import { randomUUID } from "crypto"
 import path from "path"
@@ -51,7 +47,6 @@ export interface Product {
     categories?: { name: string } | null
 }
 
-/* اتصال (singleton)                                                    */
 let _db: Database.Database | null = null
 
 function connect(): Database.Database {
@@ -72,7 +67,6 @@ export function getDb(): Database.Database {
     return _db
 }
 
-/* ساخت جدول‌ها                                                         */
 function migrate(db: Database.Database) {
     db.exec(`
         CREATE TABLE IF NOT EXISTS categories (
@@ -122,18 +116,15 @@ function migrate(db: Database.Database) {
     migrateCategories(db)
 }
 
-/* به‌روزرسانی دسته‌بندی‌ها روی دیتابیس‌های موجود (idempotent) */
 function migrateCategories(db: Database.Database) {
     const now = new Date().toISOString()
 
-    // «کنتاکتور اکبند» → «اینورتر» (تغییر نام و نامک)
     const reversing = db
         .prepare("SELECT id FROM categories WHERE slug = 'contactor-reversing'")
         .get() as { id: string } | undefined
     if (reversing) {
         const inverterExists = db.prepare("SELECT 1 FROM categories WHERE slug = 'inverter'").get()
         if (inverterExists) {
-            // اگر دسته‌ی inverter از قبل هست، محصولات را منتقل و قدیمی را حذف کن
             db.prepare("UPDATE products SET category_id = (SELECT id FROM categories WHERE slug='inverter') WHERE category_id = ?").run(reversing.id)
             db.prepare("DELETE FROM categories WHERE id = ?").run(reversing.id)
         } else {
@@ -141,7 +132,6 @@ function migrateCategories(db: Database.Database) {
         }
     }
 
-    // افزودن دسته‌ی «کالای متفرقه» در صورت نبود
     const miscExists = db.prepare("SELECT 1 FROM categories WHERE slug = 'misc'").get()
     if (!miscExists) {
         db.prepare(
@@ -150,7 +140,6 @@ function migrateCategories(db: Database.Database) {
     }
 }
 
-/* درج داده اولیه (فقط وقتی دیتابیس خالی است)                            */
 function seed(db: Database.Database) {
     const count = (db.prepare("SELECT COUNT(*) AS c FROM products").get() as { c: number }).c
     if (count > 0) return
@@ -208,12 +197,8 @@ function seed(db: Database.Database) {
     })
 
     tx()
-    console.log(
-        `✅ دیتابیس استوک سیتی مقداردهی شد: ${seedProducts.length} محصول، ${seedBrands.length} برند، ${seedCategories.length} دسته.`,
-    )
 }
 
-/* تبدیل ردیف خام به آبجکت محصول                                         */
 type RawProductRow = {
     id: string
     title: string
@@ -290,7 +275,6 @@ const JOINS = `
     LEFT JOIN categories c ON c.id = p.category_id
 `
 
-// شرط یکسان و کاملاً پارامتری برای همه حالت‌ها (NULL یعنی فیلتر غیرفعال).
 const FILTER = `
     WHERE (@categorySlug IS NULL OR c.slug = @categorySlug)
       AND (@brandSlug    IS NULL OR b.slug = @brandSlug)
@@ -298,13 +282,11 @@ const FILTER = `
       AND (@q IS NULL OR p.title LIKE @q OR p.model_number LIKE @q)
 `
 
-// رشته‌های SQL کاملاً ثابت‌اند (فقط جهت مرتب‌سازی متغیر است).
 const SQL_LIST_DESC = `SELECT ${PRODUCT_COLUMNS} ${JOINS} ${FILTER} ORDER BY p.created_at DESC, p.id ASC LIMIT @limit OFFSET @offset`
 const SQL_LIST_ASC = `SELECT ${PRODUCT_COLUMNS} ${JOINS} ${FILTER} ORDER BY p.created_at ASC, p.id ASC LIMIT @limit OFFSET @offset`
 const SQL_LIST_TITLE = `SELECT ${PRODUCT_COLUMNS} ${JOINS} ${FILTER} ORDER BY p.title ASC, p.id ASC LIMIT @limit OFFSET @offset`
 const SQL_COUNT = `SELECT COUNT(*) AS c ${JOINS} ${FILTER}`
 
-/* خواندن محصولات + فیلتر + صفحه‌بندی                                    */
 export interface ProductFilters {
     categorySlug?: string
     brandSlug?: string
@@ -363,7 +345,6 @@ export function getProductById(id: string): Product | null {
     return row ? mapProduct(row) : null
 }
 
-/* نوشتن محصول                                                          */
 export interface ProductInput {
     title: string
     model_number: string
@@ -442,7 +423,6 @@ export function deleteProductById(id: string): void {
     getDb().prepare("DELETE FROM products WHERE id = @id").run({ id })
 }
 
-/* برند و دسته                                                          */
 export function listBrands(): Brand[] {
     return getDb()
         .prepare("SELECT id, name, slug, logo_url, website FROM brands ORDER BY name")
@@ -520,7 +500,6 @@ export function updateCategory(
 }
 
 export function deleteCategoryById(id: string): void {
-    // FK روی products با ON DELETE SET NULL تعریف شده، پس محصولات حذف نمی‌شوند.
     getDb().prepare("DELETE FROM categories WHERE id = @id").run({ id })
 }
 
@@ -558,7 +537,6 @@ export function findOrCreateBrand(name: string): string {
     return id
 }
 
-/* تنظیمات سایت (key/value)                                              */
 export function getSettings(): Record<string, string> {
     const rows = getDb().prepare("SELECT key, value FROM settings").all() as {
         key: string
@@ -589,7 +567,6 @@ export function counts(): { products: number; brands: number; categories: number
     }
 }
 
-/* خروجی همه‌ی محصولات (برای Export)                                     */
 export function allProductsForExport(): Product[] {
     const rows = getDb()
         .prepare(`SELECT ${PRODUCT_COLUMNS} ${JOINS} ORDER BY p.created_at DESC`)
@@ -597,9 +574,6 @@ export function allProductsForExport(): Product[] {
     return rows.map(mapProduct)
 }
 
-/* ورود گروهی محصولات (Import)                                          */
-/* هر ردیف بر اساس model_number یکتا: اگر باشد به‌روزرسانی، وگرنه ایجاد.    */
-/* برند و دسته با نام تطبیق داده می‌شوند (نبودند ساخته می‌شوند).           */
 export interface ImportRow {
     title: string
     model_number: string
@@ -638,7 +612,7 @@ export function importProducts(rows: ImportRow[]): ImportResult {
     const tx = db.transaction(() => {
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i]
-            const line = i + 2 // شماره‌ی سطر در فایل (با هدر)
+            const line = i + 2
             try {
                 if (!row.title?.trim() || !row.model_number?.trim()) {
                     result.skipped++
@@ -666,7 +640,6 @@ export function importProducts(rows: ImportRow[]): ImportResult {
                 }
 
                 if (existing) {
-                    // در حالت آپدیت، تصاویر دست‌نخورده می‌مانند
                     db.prepare(`
                         UPDATE products SET
                             title=@title, description=@description, category_id=@category_id, brand_id=@brand_id,

@@ -18,7 +18,7 @@ export default function ContactPage() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* کارت‌های تماس */}
+                
                 <div className="space-y-4">
                     <a
                         href={`tel:${siteConfig.phoneRaw}`}
@@ -74,7 +74,7 @@ export default function ContactPage() {
                     </div>
                 </div>
 
-                {/* نقشه */}
+                
                 <div className="bg-card border border-border rounded-2xl overflow-hidden flex flex-col">
                     <iframe
                         title="موقعیت فروشگاه روی نقشه"

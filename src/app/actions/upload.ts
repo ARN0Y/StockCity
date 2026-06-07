@@ -4,7 +4,7 @@ import { cookies } from "next/headers"
 import { AUTH_COOKIE, verifySessionToken } from "@/lib/auth"
 import { optimizeAndSaveImage, deleteImageFiles } from "@/lib/image"
 
-const MAX_BYTES = 15 * 1024 * 1024 // 15MB ورودی خام
+const MAX_BYTES = 15 * 1024 * 1024
 const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"]
 
 async function assertAdmin() {
@@ -20,7 +20,6 @@ export interface UploadResult {
     error?: string
 }
 
-/** آپلود و بهینه‌سازی یک تصویر محصول. فقط برای ادمین. */
 export async function uploadProductImage(formData: FormData): Promise<UploadResult> {
     try {
         await assertAdmin()
@@ -36,7 +35,6 @@ export async function uploadProductImage(formData: FormData): Promise<UploadResu
             return { success: false, error: "فرمت تصویر پشتیبانی نمی‌شود." }
         }
 
-        // نام‌گذاری فایل بر اساس عنوان/کد محصول (اگر فرستاده شده باشد)
         const nameHint = String(formData.get("nameHint") || "")
 
         const bytes = new Uint8Array(await file.arrayBuffer())
@@ -48,7 +46,6 @@ export async function uploadProductImage(formData: FormData): Promise<UploadResu
     }
 }
 
-/** حذف فایل تصویر از دیسک. */
 export async function removeProductImage(url: string): Promise<{ success: boolean }> {
     try {
         await assertAdmin()

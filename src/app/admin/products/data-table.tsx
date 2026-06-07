@@ -45,7 +45,6 @@ export function DataTable<TData, TValue>({
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [globalFilter, setGlobalFilter] = React.useState("")
 
-    // جستجوی سراسری: هم روی نام محصول و هم روی کد فنی می‌گردد
     const globalFilterFn = React.useCallback(
         (row: any, _columnId: string, filterValue: string) => {
             const q = String(filterValue).trim().toLowerCase()
@@ -72,7 +71,6 @@ export function DataTable<TData, TValue>({
         initialState: { pagination: { pageSize: 15 } },
     })
 
-    // وقتی تیک رو برمیداریم و آرایه خالی میشه، فیلتر رو کامل حذف میکنیم
     const toggleFilter = (columnId: string, value: string, checked: boolean) => {
         const col = table.getColumn(columnId)
         if (!col) return
@@ -83,7 +81,6 @@ export function DataTable<TData, TValue>({
             col.setFilterValue([...current, value])
         } else {
             const next = current.filter((v) => v !== value)
-            // اگه آرایه خالی شد، undefined ست کن تا فیلتر کامل حذف بشه
             col.setFilterValue(next.length > 0 ? next : undefined)
         }
     }
@@ -112,7 +109,7 @@ export function DataTable<TData, TValue>({
 
     return (
         <div className="space-y-3">
-            {/* Toolbar */}
+            
             <div className="flex items-center gap-2 flex-wrap">
                 <div className="relative flex-1 max-w-sm">
                     <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -187,7 +184,7 @@ export function DataTable<TData, TValue>({
                 )}
             </div>
 
-            {/* Table */}
+            
             <div className="rounded-xl border border-border bg-card overflow-hidden">
                 <Table>
                     <TableHeader>
@@ -237,7 +234,7 @@ export function DataTable<TData, TValue>({
                 </Table>
             </div>
 
-            {/* Pagination */}
+            
             <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">
                     {table.getFilteredRowModel().rows.length} محصول

@@ -25,9 +25,9 @@ export default async function HomePage() {
 
     return (
         <div className="space-y-12 sm:space-y-14 pb-12">
-            {/* HERO */}
+            
             <section className="relative overflow-hidden rounded-3xl border border-border shadow-sm bg-gradient-to-br from-card via-card to-muted/40">
-                {/* درخشش نرم برند در گوشه */}
+                
                 <div className="absolute -right-32 -top-32 h-[520px] w-[520px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
                 <div className="absolute -left-20 bottom-0 h-[360px] w-[360px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -111,7 +111,7 @@ export default async function HomePage() {
                 </div>
             </section>
 
-            {/* دسته‌بندی‌ها — موبایل */}
+            
             <section className="lg:hidden grid grid-cols-2 gap-3">
                 {categories.map((cat) => {
                     const Icon = CATEGORY_ICONS[cat.slug] ?? Box
@@ -129,7 +129,7 @@ export default async function HomePage() {
                 })}
             </section>
 
-            {/* محصولات */}
+            
             <section className="space-y-6">
                 <div className="flex items-center justify-between px-1">
                     <div className="flex items-center gap-3">

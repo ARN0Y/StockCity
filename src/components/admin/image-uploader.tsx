@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast"
 interface Props {
     value: string[]
     onChange: (images: string[]) => void
-    /** متن برای نام‌گذاری فایل‌ها (مثل کد فنی یا عنوان محصول) */
+    
     nameHint?: string
 }
 
@@ -94,7 +94,7 @@ export function ImageUploader({ value, onChange, nameHint }: Props) {
 
     return (
         <div className="space-y-4">
-            {/* محل کشیدن و رها کردن */}
+            
             <div
                 onDragOver={(e) => {
                     e.preventDefault()
@@ -148,7 +148,7 @@ export function ImageUploader({ value, onChange, nameHint }: Props) {
                 />
             </div>
 
-            {/* پیش‌نمایش تصاویر */}
+            
             {value.length > 0 ? (
                 <div className="grid grid-cols-3 gap-3">
                     {value.map((img, i) => (

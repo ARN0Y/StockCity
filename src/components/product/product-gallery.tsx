@@ -14,30 +14,24 @@ interface ProductGalleryProps {
 export function ProductGallery({ images, title }: ProductGalleryProps) {
     const safeImages = images.length > 0 ? images : ["/placeholder.png"]
 
-    // استیت برای عکس انتخاب شده
     const [selectedImage, setSelectedImage] = useState(safeImages[0])
-    // استیت برای باز/بسته بودن حالت بزرگنمایی
     const [isZoomOpen, setIsZoomOpen] = useState(false)
     const [shared, setShared] = useState(false)
 
     const handleShare = useCallback(async () => {
         const url = typeof window !== "undefined" ? window.location.href : ""
-        // اگر مرورگر از اشتراک‌گذاری بومی پشتیبانی کند (موبایل)
         if (navigator.share) {
             try {
                 await navigator.share({ title, url })
                 return
             } catch {
-                // کاربر لغو کرد یا خطا — به کپی لینک برمی‌گردیم
             }
         }
-        // در غیر این صورت لینک را کپی می‌کنیم
         try {
             await navigator.clipboard.writeText(url)
             setShared(true)
             setTimeout(() => setShared(false), 2000)
         } catch {
-            // ignore
         }
     }, [title])
 
@@ -45,7 +39,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
         <>
             <div className="bg-white p-6 lg:p-8 border-b lg:border-b-0 lg:border-l border-border relative min-h-[360px] lg:min-h-[500px] flex flex-col justify-between h-full">
 
-                {/* ابزارهای بالا */}
+                
                 <div className="absolute top-4 left-4 z-10 flex gap-2">
                     <Button
                         size="icon"
@@ -66,7 +60,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
                     )}
                 </div>
 
-                {/* تصویر اصلی */}
+                
                 <div
                     className="flex-1 flex items-center justify-center py-8 relative group cursor-zoom-in"
                     onClick={() => setIsZoomOpen(true)}
@@ -81,7 +75,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
                         />
                     </div>
 
-                    {/* دکمه راهنما برای زوم */}
+                    
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div className="bg-slate-900/90 text-white px-3 py-1.5 rounded-full backdrop-blur-sm flex items-center gap-2 text-xs shadow-lg">
                             <Maximize2 className="w-4 h-4" />
@@ -90,7 +84,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
                     </div>
                 </div>
 
-                {/* تصاویر کوچک */}
+                
                 {safeImages.length > 1 && (
                     <div className="flex gap-3 justify-center mt-4 overflow-x-auto p-2 scrollbar-hide select-none">
                         {safeImages.map((img, i) => (
@@ -100,7 +94,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
                                 className={cn(
                                     "relative w-20 h-20 rounded-md flex items-center justify-center p-1 cursor-pointer transition-all bg-white shrink-0",
                                     selectedImage === img
-                                        ? "ring-2 ring-primary ring-offset-2 z-10 shadow-sm scale-105" // scale-105 کمی بزرگش میکنه که با پدینگ بالا هندل میشه
+                                        ? "ring-2 ring-primary ring-offset-2 z-10 shadow-sm scale-105"
                                         : "border border-slate-200 hover:border-slate-300 opacity-80 hover:opacity-100"
                                 )}
                             >
@@ -118,7 +112,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
                 )}
             </div>
 
-            {/* MODAL LIGHTBOX */}
+            
             {isZoomOpen && (
                 <div
                     className="fixed inset-0 z-[100] bg-white/95 backdrop-blur-md flex items-center justify-center animate-in fade-in duration-200"

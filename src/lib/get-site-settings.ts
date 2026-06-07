@@ -1,6 +1,3 @@
-// تنظیمات زنده‌ی سایت: مقادیر دیتابیس روی پیش‌فرض‌های siteConfig سوار می‌شوند.
-// این فایل فقط سمت سرور استفاده می‌شود (به db وابسته است).
-
 import { getSettings } from "@/lib/db"
 import { siteConfig } from "@/lib/site-config"
 
@@ -16,7 +13,6 @@ export interface SiteSettings {
     warrantyNote: string
     instagram: string
     telegram: string
-    // نوار اعلان بالای سایت
     announcementEnabled: boolean
     announcementText: string
     announcementLink: string

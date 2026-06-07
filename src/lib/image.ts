@@ -12,9 +12,6 @@ async function getSharp() {
     return _sharp!
 }
 
-// عکس‌ها در پوشه‌ی uploads (خارج از public) ذخیره می‌شوند و از طریق مسیر /media سرو می‌شوند.
-// دلیل: فایل‌های داخل public فقط هنگام شروع سرور اسکن می‌شوند و عکس‌های آپلودی runtime
-// تا ری‌استارت دیده نمی‌شوند. پوشه‌ی uploads با route handler در لحظه خوانده می‌شود.
 const UPLOADS_DIR = path.join(process.cwd(), "uploads")
 
 const MAX_DIMENSION = 1400
@@ -33,11 +30,6 @@ export interface OptimizedImage {
     bytes: number
 }
 
-/**
- * یک اسلاگ امن برای نام فایل از روی متن دلخواه (مثل عنوان محصول) می‌سازد.
- * حروف لاتین و عدد نگه داشته می‌شوند؛ فاصله و کاراکترهای دیگر به - تبدیل می‌شوند.
- * اگر متن لاتین معتبری نداشت (مثلاً کاملاً فارسی بود) رشته‌ی خالی برمی‌گرداند.
- */
 export function fileSlug(input: string): string {
     return (input || "")
         .toLowerCase()
@@ -46,20 +38,12 @@ export function fileSlug(input: string): string {
         .slice(0, 50)
 }
 
-/**
- * یک نام پایه‌ی یکتا برای فایل می‌سازد: اسلاگ + بخش کوتاه تصادفی برای جلوگیری از تداخل.
- */
 function buildBaseName(hint?: string): string {
     const slug = fileSlug(hint || "")
     const rand = randomUUID().slice(0, 6)
     return slug ? `${slug}-${rand}` : `product-${rand}`
 }
 
-/**
- * یک فایل تصویر را بهینه و ذخیره می‌کند.
- * @param input بافر یا آرایه‌بایت تصویر ورودی
- * @param nameHint متن اختیاری برای نام‌گذاری فایل (مثل عنوان یا کد محصول)
- */
 export async function optimizeAndSaveImage(
     input: Buffer | Uint8Array,
     nameHint?: string,
@@ -75,7 +59,6 @@ export async function optimizeAndSaveImage(
     const buffer = Buffer.isBuffer(input) ? input : Buffer.from(input)
     const sharp = await getSharp()
 
-    // هر خروجی از یک نمونه‌ی تازه‌ی sharp ساخته می‌شود تا پایپ‌لاین خراب/سفید نشود.
     const mainInfo = await sharp(buffer, { failOn: "none" })
         .rotate()
         .resize(MAX_DIMENSION, MAX_DIMENSION, { fit: "inside", withoutEnlargement: true })
@@ -97,12 +80,7 @@ export async function optimizeAndSaveImage(
     }
 }
 
-/**
- * حذف فایل تصویر و نسخه‌ی بندانگشتی متناظرش از دیسک.
- * فقط فایل‌های داخل پوشه‌ی uploads را حذف می‌کند.
- */
 export async function deleteImageFiles(publicUrl: string): Promise<void> {
-    // فقط فایل‌های داخل /media/ (پوشه‌ی uploads) حذف می‌شوند.
     if (!publicUrl || !publicUrl.startsWith("/media/")) return
     const fileName = path.basename(publicUrl)
     if (fileName.includes("..") || fileName.includes("/") || fileName.includes("\\")) return
@@ -117,7 +95,6 @@ export async function deleteImageFiles(publicUrl: string): Promise<void> {
     ])
 }
 
-/** آدرس نسخه‌ی بندانگشتی را از روی آدرس اصلی می‌سازد. */
 export function toThumbUrl(url: string): string {
     if (!url || !url.startsWith("/media/")) return url
     return url.replace(/(\.[a-z0-9]+)(\?.*)?$/i, "_thumb$1")

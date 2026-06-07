@@ -31,16 +31,12 @@ export function ProductGrid({
     const [loading, setLoading] = useState(false)
     const [total, setTotal] = useState(initialTotal)
 
-    // محاسبه اینکه آیا صفحه بعدی وجود دارد
     const hasMore = products.length < total
 
-    // رفرنس برای جلوگیری از لود همزمان چندباره
     const loadingRef = useRef(false)
     const observerRef = useRef<IntersectionObserver | null>(null)
     const sentinelRef = useRef<HTMLDivElement | null>(null)
 
-    // ریست کردن وقتی initialProducts عوض میشه
-    // (مثلاً وقتی key کامپوننت عوض شد)
     useEffect(() => {
         setProducts(initialProducts || [])
         setPage(1)
@@ -48,7 +44,6 @@ export function ProductGrid({
         loadingRef.current = false
     }, [initialProducts, initialTotal])
 
-    // تابع لود صفحه بعدی
     const loadMore = useCallback(async () => {
         if (loadingRef.current || !hasMore) return
         loadingRef.current = true
@@ -61,16 +56,13 @@ export function ProductGrid({
 
             if (newProducts.length > 0) {
                 setProducts(prev => {
-                    // حذف تکراری‌ها
                     const existingIds = new Set(prev.map(p => p.id))
                     const unique = newProducts.filter(p => !existingIds.has(p.id))
                     return [...prev, ...unique]
                 })
                 setPage(nextPage)
-                // آپدیت total از سرور (ممکنه تغییر کرده باشه)
                 setTotal(result.total)
             } else {
-                // سرور گفت خالیه، total رو بزار همون تعداد فعلی
                 setTotal(prev => Math.min(prev, products.length))
             }
         } catch (error) {
@@ -82,27 +74,23 @@ export function ProductGrid({
     }, [page, hasMore, filters, products.length])
 
     useEffect(() => {
-        // فقط در حالت infinite فعال شو
         if (mode !== "infinite") return
 
-        // observer قبلی رو پاک کن
         if (observerRef.current) {
             observerRef.current.disconnect()
         }
 
-        // اگه دیگه چیزی نیست لود نکن
         if (!hasMore) return
 
         const observer = new IntersectionObserver(
             (entries) => {
-                // فقط وقتی sentinel دیده شد و در حال لود نیستیم
                 if (entries[0].isIntersecting && !loadingRef.current) {
                     loadMore()
                 }
             },
             {
                 threshold: 0.1,
-                rootMargin: "200px" // کمی زودتر شروع به لود کن
+                rootMargin: "200px"
             }
         )
 
@@ -117,17 +105,16 @@ export function ProductGrid({
         }
     }, [mode, hasMore, loadMore])
 
-    // رندر
     return (
         <div className="space-y-10">
-            {/* گرید محصولات */}
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
 
-            {/* بخش لود بیشتر */}
+            
             <div className="flex justify-center pt-4 pb-8">
                 {hasMore ? (
                     mode === "button" ? (

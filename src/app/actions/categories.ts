@@ -65,7 +65,6 @@ export async function removeCategory(id: string): Promise<CategoryActionResult> 
     }
 }
 
-/** افزودن سریع برند از داخل فرم محصول. */
 export async function quickAddBrand(
     name: string,
 ): Promise<{ success: boolean; id?: string; name?: string; error?: string }> {
