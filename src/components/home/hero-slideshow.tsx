@@ -12,12 +12,12 @@ interface Slide {
 
 // عکس‌ها در public/slides/ قرار دارند. برای تغییر بنرها کافی است فایل‌ها را جایگزین کنید.
 const SLIDES: Slide[] = [
-    { src: "/slides/slide-1.jpg", alt: "فروش انواع اینورترهای صنعتی نو و استوک", href: "/products" },
-    { src: "/slides/slide-2.jpg", alt: "فروش انواع کلیدهای اتوماتیک صنعتی استوک اروپایی", href: "/products" },
-    { src: "/slides/slide-3.jpg", alt: "فروش انواع کنتاکتورهای صنعتی استوک اروپایی", href: "/products" },
-    { src: "/slides/slide-4.jpg", alt: "تعمیرات تخصصی کلید هوایی، کلید اتوماتیک و کنتاکتور", href: "/repairs" },
-    { src: "/slides/slide-5.jpg", alt: "تعمیرات تخصصی اینورترهای صنعتی تا رنج ۱۸۰۰ کیلووات", href: "/repairs" },
-    { src: "/slides/slide-6.jpg", alt: "ساخت و طراحی انواع تیغه پلاتین کلید و کنتاکتور صنعتی", href: "/repairs" },
+    { src: "/slides/slide-1.webp", alt: "فروش انواع اینورترهای صنعتی نو و استوک", href: "/products" },
+    { src: "/slides/slide-2.webp", alt: "فروش انواع کلیدهای اتوماتیک صنعتی استوک اروپایی", href: "/products" },
+    { src: "/slides/slide-3.webp", alt: "فروش انواع کنتاکتورهای صنعتی استوک اروپایی", href: "/products" },
+    { src: "/slides/slide-4.webp", alt: "تعمیرات تخصصی کلید هوایی، کلید اتوماتیک و کنتاکتور", href: "/repairs" },
+    { src: "/slides/slide-5.webp", alt: "تعمیرات تخصصی اینورترهای صنعتی تا رنج ۱۸۰۰ کیلووات", href: "/repairs" },
+    { src: "/slides/slide-6.webp", alt: "ساخت و طراحی انواع تیغه پلاتین کلید و کنتاکتور صنعتی", href: "/repairs" },
 ]
 
 const INTERVAL = 5000

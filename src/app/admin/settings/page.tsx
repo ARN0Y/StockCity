@@ -22,6 +22,10 @@ export default function AdminSettingsPage() {
         announcementEnabled: saved.announcementEnabled ?? "0",
         announcementText: saved.announcementText ?? "",
         announcementLink: saved.announcementLink ?? "",
+        repairImage1: saved.repairImage1 ?? "",
+        repairImage2: saved.repairImage2 ?? "",
+        repairImage3: saved.repairImage3 ?? "",
+        repairImage4: saved.repairImage4 ?? "",
     }
 
     return <SettingsForm initial={initial} />

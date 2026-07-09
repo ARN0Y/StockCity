@@ -10,7 +10,15 @@ import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { saveSiteSettings } from "@/app/actions/settings"
-import { Save, Loader2, Megaphone, Phone, MapPin, Share2, ShieldCheck } from "lucide-react"
+import { SingleImageField } from "@/components/admin/single-image-field"
+import { Save, Loader2, Megaphone, Phone, MapPin, Share2, ShieldCheck, Wrench } from "lucide-react"
+
+const REPAIR_SECTION_TITLES = [
+    "تعمیر تخصصی اینورترهای صنعتی",
+    "تعمیر کلید اتوماتیک و کلید هوایی",
+    "تعمیر و بازسازی کنتاکتورهای صنعتی",
+    "ساخت و طراحی تیغه پلاتین",
+]
 
 interface Props {
     initial: Record<string, string>
@@ -36,6 +44,10 @@ export function SettingsForm({ initial }: Props) {
         announcementEnabled: initial.announcementEnabled === "1",
         announcementText: initial.announcementText || "",
         announcementLink: initial.announcementLink || "",
+        repairImage1: initial.repairImage1 || "",
+        repairImage2: initial.repairImage2 || "",
+        repairImage3: initial.repairImage3 || "",
+        repairImage4: initial.repairImage4 || "",
     })
 
     const set = (key: keyof typeof v, value: string | boolean) =>
@@ -180,6 +192,34 @@ export function SettingsForm({ initial }: Props) {
                     <div className="space-y-2">
                         <Label>لینک اینستاگرام</Label>
                         <Input value={v.instagram} onChange={(e) => set("instagram", e.target.value)} placeholder="https://instagram.com/..." dir="ltr" className="text-left" />
+                    </div>
+                </CardContent>
+            </Card>
+
+            {/* تصاویر صفحه تعمیرات */}
+            <Card>
+                <CardHeader className="pb-3">
+                    <CardTitle className="text-sm font-bold flex items-center gap-2">
+                        <Wrench className="w-4 h-4 text-primary" /> تصاویر صفحه تعمیرات
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <p className="text-xs text-muted-foreground">
+                        برای هر بخش صفحه‌ی «تعمیرات» یک تصویر آپلود کنید. اگر تصویری انتخاب نشود، همان طرح پیش‌فرض نمایش داده می‌شود.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        {REPAIR_SECTION_TITLES.map((title, i) => {
+                            const key = `repairImage${i + 1}` as keyof typeof v
+                            return (
+                                <SingleImageField
+                                    key={key}
+                                    label={`${i + 1}. ${title}`}
+                                    value={v[key] as string}
+                                    onChange={(url) => set(key, url)}
+                                    nameHint={`repair-${i + 1}`}
+                                />
+                            )
+                        })}
                     </div>
                 </CardContent>
             </Card>

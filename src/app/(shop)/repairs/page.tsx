@@ -14,6 +14,7 @@ import {
     BadgeCheck,
 } from "lucide-react"
 import { siteConfig } from "@/lib/site-config"
+import { getSiteSettings } from "@/lib/get-site-settings"
 
 export const metadata: Metadata = {
     title: "تعمیرات",
@@ -59,6 +60,7 @@ const perks = [
 ]
 
 export default function RepairsPage() {
+    const { repairImages } = getSiteSettings()
     return (
         <div className="max-w-5xl mx-auto space-y-12 py-4">
             {/* هدر صفحه (هم‌سبک با صفحه درباره ما) */}
@@ -121,18 +123,27 @@ export default function RepairsPage() {
                                 </ul>
                             </div>
 
-                            {/* پنل تزئینی (جایگزین عکس) */}
+                            {/* تصویر آپلودشده (از تنظیمات) یا طرح تزئینی پیش‌فرض */}
                             <div className={reverse ? "md:order-1" : "md:order-2"}>
-                                <div className="relative h-full min-h-52 rounded-2xl bg-gradient-to-br from-primary/12 via-card to-muted border border-border overflow-hidden flex items-center justify-center">
-                                    <div className="absolute -right-10 -top-10 h-40 w-40 bg-primary/15 rounded-full blur-2xl" />
-                                    <div className="absolute -left-8 -bottom-8 h-32 w-32 bg-primary/10 rounded-full blur-xl" />
-                                    <span className="absolute top-3 left-5 text-8xl font-black leading-none text-primary/10 select-none">
-                                        {s.num}
-                                    </span>
-                                    <div className="relative w-24 h-24 rounded-3xl bg-background/70 backdrop-blur border border-border shadow-sm text-primary flex items-center justify-center transition-transform group-hover:scale-105">
-                                        <Icon className="w-11 h-11" />
+                                {repairImages[i] ? (
+                                    // eslint-disable-next-line @next/next/no-img-element
+                                    <img
+                                        src={repairImages[i]}
+                                        alt={s.title}
+                                        className="h-full min-h-52 w-full rounded-2xl border border-border object-cover shadow-sm"
+                                    />
+                                ) : (
+                                    <div className="relative h-full min-h-52 rounded-2xl bg-gradient-to-br from-primary/12 via-card to-muted border border-border overflow-hidden flex items-center justify-center">
+                                        <div className="absolute -right-10 -top-10 h-40 w-40 bg-primary/15 rounded-full blur-2xl" />
+                                        <div className="absolute -left-8 -bottom-8 h-32 w-32 bg-primary/10 rounded-full blur-xl" />
+                                        <span className="absolute top-3 left-5 text-8xl font-black leading-none text-primary/10 select-none">
+                                            {s.num}
+                                        </span>
+                                        <div className="relative w-24 h-24 rounded-3xl bg-background/70 backdrop-blur border border-border shadow-sm text-primary flex items-center justify-center transition-transform group-hover:scale-105">
+                                            <Icon className="w-11 h-11" />
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                         </section>
                     )

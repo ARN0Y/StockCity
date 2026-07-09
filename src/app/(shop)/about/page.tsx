@@ -48,7 +48,7 @@ export default function AboutPage() {
                     <div className="shrink-0 mx-auto md:mx-0">
                         <div className="bg-white rounded-2xl p-4 shadow-lg w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/logo.jpg" alt={`لوگوی ${siteConfig.nameEn}`} className="max-w-full max-h-full object-contain" />
+                            <img src="/logo.webp" alt={`لوگوی ${siteConfig.nameEn}`} className="max-w-full max-h-full object-contain" />
                         </div>
                     </div>
                 </div>

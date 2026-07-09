@@ -16,6 +16,7 @@ export interface SiteSettings {
     announcementEnabled: boolean
     announcementText: string
     announcementLink: string
+    repairImages: string[]
 }
 
 export function getSiteSettings(): SiteSettings {
@@ -38,5 +39,6 @@ export function getSiteSettings(): SiteSettings {
         announcementEnabled: s["announcementEnabled"] === "1",
         announcementText: s["announcementText"] ?? "",
         announcementLink: s["announcementLink"] ?? "",
+        repairImages: [1, 2, 3, 4].map((n) => s[`repairImage${n}`] ?? ""),
     }
 }

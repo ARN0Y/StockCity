@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useState, useEffect, useRef, useCallback } from "react"
-import { Search, Menu, Phone, Zap, MessageCircle, Loader2, X, Home, Package, Info, MapPin, LayoutDashboard, Wrench } from "lucide-react"
+import { Search, Menu, Phone, MessageCircle, Loader2, X, Home, Package, Info, MapPin, LayoutDashboard, Wrench } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -172,8 +172,9 @@ export function Header({
                         <SheetTitle className="sr-only">منوی اصلی</SheetTitle>
 
                         <div className="flex items-center gap-2 px-5 h-16 border-b border-border">
-                            <div className="bg-primary p-1.5 rounded-lg">
-                                <Zap className="h-5 w-5 text-white" />
+                            <div className="bg-white rounded-lg p-1 ring-1 ring-border">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src="/logo.webp" alt={cfg.nameFa} className="h-8 w-8 object-contain" />
                             </div>
                             <span className="text-lg font-black text-foreground">
                                 Stock<span className="text-primary">City</span>
@@ -234,8 +235,9 @@ export function Header({
 
                 
                 <Link href="/" className="flex items-center gap-2 shrink-0 group">
-                    <div className="bg-primary p-2 rounded-lg transition-transform group-hover:scale-110">
-                        <Zap className="h-6 w-6 text-white" />
+                    <div className="bg-white rounded-lg p-1 shadow-sm ring-1 ring-border transition-transform group-hover:scale-110">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/logo.webp" alt={cfg.nameFa} className="h-9 w-9 sm:h-10 sm:w-10 object-contain" />
                     </div>
                     <div className="flex flex-col">
                         <span className="text-lg sm:text-xl font-black tracking-tight text-foreground leading-none">
