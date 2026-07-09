@@ -171,8 +171,9 @@ export function SettingsForm({ initial }: Props) {
                         <Input value={v.warrantyBrand} onChange={(e) => set("warrantyBrand", e.target.value)} placeholder="Patvaz" dir="ltr" className="text-left" />
                     </div>
                     <div className="space-y-2">
-                        <Label>توضیح گارانتی</Label>
-                        <Textarea value={v.warrantyNote} onChange={(e) => set("warrantyNote", e.target.value)} placeholder="محصولات برند پاتواز دارای گارانتی تعویض هستند." rows={2} />
+                        <Label>جمله گارانتی</Label>
+                        <Textarea value={v.warrantyNote} onChange={(e) => set("warrantyNote", e.target.value)} placeholder="محصولات برند پاتواز (Patvaz) دارای گارانتی تعویض در صورت بروز هر مشکل هستند." rows={3} />
+                        <p className="text-xs text-muted-foreground">این جمله در فوتر سایت، صفحه‌ی تماس و صفحه‌ی درباره‌ی ما نمایش داده می‌شود.</p>
                     </div>
                 </CardContent>
             </Card>
