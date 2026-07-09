@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useState, useEffect, useRef, useCallback } from "react"
-import { Search, Menu, Phone, Zap, MessageCircle, Loader2, X, Home, Package, Info, MapPin, LayoutDashboard } from "lucide-react"
+import { Search, Menu, Phone, Zap, MessageCircle, Loader2, X, Home, Package, Info, MapPin, LayoutDashboard, Wrench } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -209,6 +209,9 @@ export function Header({
                                 <Link href="/about" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-5 py-3 text-sm font-medium text-foreground hover:bg-accent transition-colors">
                                     <Info className="w-[18px] h-[18px] text-muted-foreground" /> درباره ما
                                 </Link>
+                                <Link href="/repairs" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-5 py-3 text-sm font-medium text-foreground hover:bg-accent transition-colors">
+                                    <Wrench className="w-[18px] h-[18px] text-muted-foreground" /> تعمیرات
+                                </Link>
                                 <Link href="/contact" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 px-5 py-3 text-sm font-medium text-foreground hover:bg-accent transition-colors">
                                     <MapPin className="w-[18px] h-[18px] text-muted-foreground" /> تماس با ما
                                 </Link>
@@ -287,6 +290,7 @@ export function Header({
                         ))}
                         <span className="w-px h-4 bg-border" />
                         <Link href="/about" className="hover:text-primary transition-colors whitespace-nowrap">درباره ما</Link>
+                        <Link href="/repairs" className="hover:text-primary transition-colors whitespace-nowrap">تعمیرات</Link>
                         <Link href="/contact" className="hover:text-primary transition-colors whitespace-nowrap">تماس با ما</Link>
                     </nav>
                 </div>

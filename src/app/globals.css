@@ -17,8 +17,8 @@
         --popover: 0 0% 100%;
         --popover-foreground: 222.2 84% 4.9%;
 
-        /* Safety Orange (Schneider/Siemens vibes) */
-        --primary: 21 90% 48%;
+        /* Brand Red (منطبق با لوگوی Stock City) */
+        --primary: 358 85% 48%;
         --primary-foreground: 210 40% 98%;
 
         --secondary: 210 40% 96.1%;
@@ -35,7 +35,7 @@
 
         --border: 214.3 31.8% 91.4%;
         --input: 214.3 31.8% 91.4%;
-        --ring: 21 90% 48%;
+        --ring: 358 85% 48%;
 
         --radius: 0.5rem;
     }
@@ -51,8 +51,8 @@
         --popover: 240 6% 10%;
         --popover-foreground: 0 0% 98%;
 
-        /* رنگ برند نارنجی حفظ می‌شود */
-        --primary: 21 90% 52%;
+        /* رنگ برند قرمز حفظ می‌شود */
+        --primary: 358 85% 55%;
         --primary-foreground: 0 0% 100%;
 
         --secondary: 240 3.7% 15.9%;
@@ -69,7 +69,7 @@
 
         --border: 240 3.7% 15.9%;
         --input: 240 3.7% 15.9%;
-        --ring: 21 90% 52%;
+        --ring: 358 85% 55%;
     }
 }
 

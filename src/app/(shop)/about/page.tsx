@@ -33,16 +33,24 @@ export default function AboutPage() {
             <section className="relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-card border border-transparent dark:border-border text-white dark:text-foreground p-8 md:p-12">
                 <div className="absolute -left-24 -top-24 h-80 w-80 bg-primary/25 rounded-full blur-[110px]" />
                 <div className="absolute -right-16 bottom-0 h-64 w-64 bg-primary/10 rounded-full blur-[90px]" />
-                <div className="relative">
-                    <div className="inline-flex items-center gap-2 bg-white/10 dark:bg-primary/15 rounded-full px-4 py-1.5 text-sm mb-5">
-                        <Zap className="w-4 h-4 text-primary" /> {siteConfig.nameEn}
+                <div className="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
+                    <div>
+                        <div className="inline-flex items-center gap-2 bg-white/10 dark:bg-primary/15 rounded-full px-4 py-1.5 text-sm mb-5">
+                            <Zap className="w-4 h-4 text-primary" /> {siteConfig.nameEn}
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black mb-4">درباره {siteConfig.nameFa}</h1>
+                        <p className="text-slate-300 dark:text-muted-foreground leading-8 text-lg max-w-2xl">
+                            {siteConfig.nameFa} ({siteConfig.nameEn}) تأمین‌کننده‌ی تخصصی تجهیزات برق صنعتی و اتوماسیون است.
+                            ما با عرضه‌ی انواع کنتاکتور، کلید اتوماتیک و کلید مینیاتوری از برندهای معتبر جهانی،
+                            نیاز پیمانکاران، تابلوسازان و صنعتگران را با تضمین اصالت کالا و قیمت رقابتی برطرف می‌کنیم.
+                        </p>
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-black mb-4">درباره {siteConfig.nameFa}</h1>
-                    <p className="text-slate-300 dark:text-muted-foreground leading-8 text-lg max-w-2xl">
-                        {siteConfig.nameFa} ({siteConfig.nameEn}) تأمین‌کننده‌ی تخصصی تجهیزات برق صنعتی و اتوماسیون است.
-                        ما با عرضه‌ی انواع کنتاکتور، کلید اتوماتیک و کلید مینیاتوری از برندهای معتبر جهانی،
-                        نیاز پیمانکاران، تابلوسازان و صنعتگران را با تضمین اصالت کالا و قیمت رقابتی برطرف می‌کنیم.
-                    </p>
+                    <div className="shrink-0 mx-auto md:mx-0">
+                        <div className="bg-white rounded-2xl p-4 shadow-lg w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/logo.jpg" alt={`لوگوی ${siteConfig.nameEn}`} className="max-w-full max-h-full object-contain" />
+                        </div>
+                    </div>
                 </div>
             </section>
 

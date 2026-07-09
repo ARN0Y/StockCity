@@ -37,6 +37,18 @@ yarn-error.log*
 # local server notes / credentials (never commit)
 ServerConfig.txt
 
+# SSL certificates & private keys (never commit)
+/stockcitygrp.com_ecc/
+*.key
+*.cer
+*.crt
+
+# design source assets (deliverable copies live in public/)
+/picts/
+
+# JetBrains IDE
+/.idea/
+
 # vercel
 .vercel
 
