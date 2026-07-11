@@ -49,6 +49,9 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
     const [stockQuantity, setStockQuantity] = useState<string>(
         initialData?.stock_quantity != null ? String(initialData.stock_quantity) : "",
     )
+    const [price, setPrice] = useState<string>(
+        initialData?.price != null ? String(initialData.price) : "",
+    )
     const [description, setDescription] = useState(initialData?.description || "")
     const [images, setImages] = useState<string[]>(initialData?.images || [])
     const [keyFeatures, setKeyFeatures] = useState<string[]>(initialData?.key_features || [])
@@ -137,6 +140,7 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                     stockStatus === "in_stock" && stockQuantity.trim() !== ""
                         ? Math.max(0, parseInt(stockQuantity, 10) || 0)
                         : null,
+                price: price.trim() !== "" ? Math.max(0, parseInt(price, 10) || 0) : null,
                 description,
                 specifications: specsObj,
                 key_features: keyFeatures,
@@ -264,6 +268,21 @@ export function ProductForm({ initialData, brands: initialBrands, categories: in
                                     />
                                 </div>
                             )}
+
+                            <div className="space-y-2">
+                                <Label className="text-xs text-muted-foreground">قیمت (تومان) — اختیاری</Label>
+                                <Input
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value.replace(/[^0-9]/g, ""))}
+                                    className="h-11 text-center"
+                                    placeholder="مثلاً ۱۲۵۰۰۰۰"
+                                    inputMode="numeric"
+                                    dir="ltr"
+                                />
+                                <p className="text-[11px] text-muted-foreground">
+                                    اگر خالی بماند، به‌جای قیمت «تماس بگیرید» نمایش داده می‌شود.
+                                </p>
+                            </div>
 
                             
                             <div className="space-y-2">

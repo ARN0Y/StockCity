@@ -49,6 +49,7 @@ export function SettingsForm({ initial }: Props) {
         repairImage3: initial.repairImage3 || "",
         repairImage4: initial.repairImage4 || "",
         aboutText: initial.aboutText || "",
+        footerText: initial.footerText || "",
     })
 
     const set = (key: keyof typeof v, value: string | boolean) =>
@@ -174,7 +175,7 @@ export function SettingsForm({ initial }: Props) {
                     <div className="space-y-2">
                         <Label>جمله گارانتی</Label>
                         <Textarea value={v.warrantyNote} onChange={(e) => set("warrantyNote", e.target.value)} placeholder="محصولات برند پاتواز (Patvaz) دارای گارانتی تعویض در صورت بروز هر مشکل هستند." rows={3} />
-                        <p className="text-xs text-muted-foreground">این جمله در فوتر سایت، صفحه‌ی تماس و صفحه‌ی درباره‌ی ما نمایش داده می‌شود.</p>
+                        <p className="text-xs text-muted-foreground">در فوتر، صفحه‌ی تماس و صفحه‌ی درباره‌ی ما نمایش داده می‌شود. برای حذف کامل گارانتی/نمایندگی از کل سایت، این فیلد و «نام برند گارانتی» را خالی بگذارید و ذخیره کنید.</p>
                     </div>
                 </CardContent>
             </Card>
@@ -198,24 +199,38 @@ export function SettingsForm({ initial }: Props) {
                 </CardContent>
             </Card>
 
-            {/* متن صفحه‌ی درباره ما */}
+            {/* متن‌های سایت */}
             <Card>
                 <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-bold flex items-center gap-2">
-                        <FileText className="w-4 h-4 text-primary" /> متن صفحه‌ی درباره ما
+                        <FileText className="w-4 h-4 text-primary" /> متن‌های سایت
                     </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
-                    <Label>متن معرفی</Label>
-                    <Textarea
-                        value={v.aboutText}
-                        onChange={(e) => set("aboutText", e.target.value)}
-                        placeholder="متن معرفی فروشگاه در صفحه‌ی «درباره ما»..."
-                        rows={6}
-                    />
-                    <p className="text-xs text-muted-foreground">
-                        این متن در کادر بالای صفحه‌ی «درباره ما» نمایش داده می‌شود. اگر خالی بماند، متن پیش‌فرض نشان داده می‌شود.
-                    </p>
+                <CardContent className="space-y-5">
+                    <div className="space-y-2">
+                        <Label>متن صفحه‌ی درباره ما</Label>
+                        <Textarea
+                            value={v.aboutText}
+                            onChange={(e) => set("aboutText", e.target.value)}
+                            placeholder="متن معرفی فروشگاه در صفحه‌ی «درباره ما»..."
+                            rows={6}
+                        />
+                        <p className="text-xs text-muted-foreground">
+                            در کادر بالای صفحه‌ی «درباره ما» نمایش داده می‌شود. اگر خالی بماند، متن پیش‌فرض نشان داده می‌شود.
+                        </p>
+                    </div>
+                    <div className="space-y-2">
+                        <Label>متن معرفی فوتر</Label>
+                        <Textarea
+                            value={v.footerText}
+                            onChange={(e) => set("footerText", e.target.value)}
+                            placeholder="متن کوتاه معرفی که در فوتر، زیر لوگو نمایش داده می‌شود..."
+                            rows={3}
+                        />
+                        <p className="text-xs text-muted-foreground">
+                            در فوتر سایت، زیر نام فروشگاه نمایش داده می‌شود. اگر خالی بماند، متن پیش‌فرض نشان داده می‌شود.
+                        </p>
+                    </div>
                 </CardContent>
             </Card>
 

@@ -28,6 +28,7 @@ export interface Product {
     key_features?: string[]
     stock_status: StockStatus
     stock_quantity?: number | null
+    price?: number | null
     created_at?: string
     updated_at?: string
     brand?: { id?: string; name: string; slug?: string; logo_url?: string | null } | null

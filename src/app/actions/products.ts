@@ -46,6 +46,7 @@ export interface SaveProductPayload {
     category_id?: string | null
     stock_status?: StockStatus
     stock_quantity?: number | null
+    price?: number | null
     specifications?: Record<string, string>
     key_features?: string[]
     images?: string[]

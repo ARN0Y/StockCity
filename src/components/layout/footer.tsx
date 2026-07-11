@@ -10,6 +10,7 @@ interface FooterContact {
     whatsapp: string
     hours: string
     warrantyNote: string
+    footerText?: string
     telegram?: string
     instagram?: string
 }
@@ -25,6 +26,10 @@ export function Footer({ contact }: { contact?: FooterContact }) {
         warrantyNote: siteConfig.warrantyNote,
     }
 
+    const footerAbout =
+        cfg.footerText?.trim() ||
+        `${siteConfig.tagline}. تأمین انواع کنتاکتور، کلید اتوماتیک و کلید مینیاتوری از برندهای معتبر.`
+
     return (
         <footer className="bg-slate-900 dark:bg-card text-slate-300 dark:text-muted-foreground pt-12 mt-auto border-t border-slate-800 dark:border-border">
             <div className="container mx-auto px-6 pb-8">
@@ -36,13 +41,15 @@ export function Footer({ contact }: { contact?: FooterContact }) {
                             Stock<span className="text-primary">City</span>
                             <span className="block text-sm font-medium text-slate-400 dark:text-muted-foreground mt-1">{cfg.nameFa}</span>
                         </h3>
-                        <p className="text-sm leading-7 text-slate-400 dark:text-muted-foreground text-justify">
-                            {siteConfig.tagline}. تأمین انواع کنتاکتور، کلید اتوماتیک و کلید مینیاتوری از برندهای معتبر.
+                        <p className="text-sm leading-7 text-slate-400 dark:text-muted-foreground text-justify whitespace-pre-line">
+                            {footerAbout}
                         </p>
-                        <div className="flex items-start gap-2.5 text-sm bg-slate-800/50 dark:bg-muted border border-slate-700/50 dark:border-border rounded-lg p-3">
-                            <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                            <span className="leading-6 text-slate-300 dark:text-muted-foreground">{cfg.warrantyNote}</span>
-                        </div>
+                        {cfg.warrantyNote && (
+                            <div className="flex items-start gap-2.5 text-sm bg-slate-800/50 dark:bg-muted border border-slate-700/50 dark:border-border rounded-lg p-3">
+                                <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                                <span className="leading-6 text-slate-300 dark:text-muted-foreground">{cfg.warrantyNote}</span>
+                            </div>
+                        )}
                         {(cfg.telegram || cfg.instagram) && (
                             <div className="flex items-center gap-2 pt-1">
                                 {cfg.telegram && (

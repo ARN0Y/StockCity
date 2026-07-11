@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { Phone, CheckCircle2, ShieldCheck, Truck, Box, FileText, ChevronLeft, MessageCircle, AlertCircle, Layers } from "lucide-react"
 import { getProductByModel } from "@/lib/db"
 import { siteConfig } from "@/lib/site-config"
+import { formatToman } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { ProductGallery } from "@/components/product/product-gallery"
@@ -125,6 +126,20 @@ export default async function ProductPage({ params }: PageProps) {
                                 ) : (
                                     <div className="px-3 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-bold border border-amber-500/20 rounded-lg flex items-center gap-1.5">
                                         <AlertCircle className="w-3.5 h-3.5" /> استعلام موجودی
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* قیمت (در صورت ثبت) */}
+                            <div className="mt-5">
+                                {formatToman(product.price) ? (
+                                    <div className="inline-flex items-baseline gap-2 bg-primary/10 border border-primary/20 rounded-xl px-4 py-2.5">
+                                        <span className="text-xs text-muted-foreground">قیمت:</span>
+                                        <span className="text-2xl font-black text-primary" dir="rtl">{formatToman(product.price)}</span>
+                                    </div>
+                                ) : (
+                                    <div className="inline-flex items-center gap-2 bg-muted border border-border rounded-xl px-4 py-2.5 text-sm font-bold text-muted-foreground">
+                                        <Phone className="w-4 h-4" /> جهت اطلاع از قیمت تماس بگیرید
                                     </div>
                                 )}
                             </div>

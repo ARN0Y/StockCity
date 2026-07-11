@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Product } from "@/types/collection"
 import { siteConfig } from "@/lib/site-config"
+import { formatToman } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 interface ProductCardProps {
@@ -24,6 +25,7 @@ function toThumb(url?: string) {
 export function ProductCard({ product }: ProductCardProps) {
     const [imageError, setImageError] = useState(false)
     const mainImage = toThumb(product.images?.[0])
+    const priceLabel = formatToman(product.price)
 
     return (
         <Card className="group overflow-hidden border-border transition-all duration-300 hover:shadow-xl hover:border-primary/40 bg-card rounded-xl py-0 gap-0">
@@ -66,6 +68,11 @@ export function ProductCard({ product }: ProductCardProps) {
                         <h3 className="font-bold text-sm leading-snug text-foreground line-clamp-2 min-h-[2.5rem] group-hover:text-primary transition-colors">
                             {product.title}
                         </h3>
+                        {priceLabel ? (
+                            <p className="text-sm font-black text-primary pt-0.5" dir="rtl">{priceLabel}</p>
+                        ) : (
+                            <p className="text-xs font-bold text-muted-foreground pt-0.5">تماس بگیرید</p>
+                        )}
                     </div>
                 </CardContent>
             </Link>

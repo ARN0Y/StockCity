@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { siteConfig } from "@/lib/site-config"
+import { getSiteSettings } from "@/lib/get-site-settings"
 import { MapPin, Phone, Clock, MessageCircle, ShieldCheck, Navigation } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default function ContactPage() {
+    const settings = getSiteSettings()
     const mapsQuery = encodeURIComponent(siteConfig.address)
 
     return (
@@ -68,10 +70,12 @@ export default function ContactPage() {
                         </div>
                     </div>
 
-                    <div className="flex items-start gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4">
-                        <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                        <p className="text-sm text-emerald-800 dark:text-emerald-300 leading-6">{siteConfig.warrantyNote}</p>
-                    </div>
+                    {settings.warrantyNote && (
+                        <div className="flex items-start gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4">
+                            <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                            <p className="text-sm text-emerald-800 dark:text-emerald-300 leading-6">{settings.warrantyNote}</p>
+                        </div>
+                    )}
                 </div>
 
                 

@@ -131,8 +131,12 @@ export function Header({
                 <div className="max-w-[1800px] mx-auto flex justify-between items-center px-4">
                     <div className="flex items-center gap-4">
                         <span>{siteConfig.tagline}</span>
-                        <span className="w-px h-3 bg-slate-700" />
-                        <span>گارانتی تعویض محصولات {cfg.warrantyBrand}</span>
+                        {cfg.warrantyBrand && (
+                            <>
+                                <span className="w-px h-3 bg-slate-700" />
+                                <span>گارانتی تعویض محصولات {cfg.warrantyBrand}</span>
+                            </>
+                        )}
                     </div>
                     <div className="flex items-center gap-3">
                         {isLoggedIn && (

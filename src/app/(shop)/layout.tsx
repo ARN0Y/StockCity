@@ -55,6 +55,7 @@ export default async function ShopLayout({ children }: { children: React.ReactNo
                     whatsapp: s.whatsapp,
                     hours: s.hours,
                     warrantyNote: s.warrantyNote,
+                    footerText: s.footerText,
                     telegram: s.telegram,
                     instagram: s.instagram,
                 }}

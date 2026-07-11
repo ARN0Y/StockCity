@@ -40,6 +40,7 @@ export default async function ProductDetailLayout({ children }: { children: Reac
                     whatsapp: s.whatsapp,
                     hours: s.hours,
                     warrantyNote: s.warrantyNote,
+                    footerText: s.footerText,
                     telegram: s.telegram,
                     instagram: s.instagram,
                 }}

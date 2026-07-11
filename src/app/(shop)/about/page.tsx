@@ -18,19 +18,21 @@ export const metadata: Metadata = {
     description: `درباره فروشگاه ${siteConfig.nameFa} — تأمین‌کننده تخصصی تجهیزات برق صنعتی در اصفهان.`,
 }
 
-const values = [
-    { icon: ShieldCheck, title: "اصالت کالا", text: "تضمین اصالت و سلامت تمام محصولات عرضه‌شده." },
-    { icon: Award, title: "گارانتی Patvaz", text: siteConfig.warrantyNote },
-    { icon: Boxes, title: "تنوع بالا", text: "بیش از ۳۰ برند معتبر در دسته‌های مختلف برق صنعتی." },
-    { icon: Truck, title: "ارسال سراسری", text: "ارسال سریع و مطمئن به سراسر کشور." },
-    { icon: PhoneCall, title: "مشاوره فنی", text: "راهنمایی تخصصی برای انتخاب درست محصول." },
-    { icon: Zap, title: "قیمت رقابتی", text: "عرضه مستقیم با بهترین قیمت بازار." },
-]
-
 export default function AboutPage() {
-    const { aboutText } = getSiteSettings()
+    const settings = getSiteSettings()
     const defaultAbout = `${siteConfig.nameFa} (${siteConfig.nameEn}) تأمین‌کننده‌ی تخصصی تجهیزات برق صنعتی و اتوماسیون است. ما با عرضه‌ی انواع کنتاکتور، کلید اتوماتیک و کلید مینیاتوری از برندهای معتبر جهانی، نیاز پیمانکاران، تابلوسازان و صنعتگران را با تضمین اصالت کالا و قیمت رقابتی برطرف می‌کنیم.`
-    const about = aboutText.trim() || defaultAbout
+    const about = settings.aboutText.trim() || defaultAbout
+
+    const values = [
+        { icon: ShieldCheck, title: "اصالت کالا", text: "تضمین اصالت و سلامت تمام محصولات عرضه‌شده." },
+        ...(settings.warrantyNote
+            ? [{ icon: Award, title: settings.warrantyBrand ? `گارانتی ${settings.warrantyBrand}` : "گارانتی", text: settings.warrantyNote }]
+            : []),
+        { icon: Boxes, title: "تنوع بالا", text: "بیش از ۳۰ برند معتبر در دسته‌های مختلف برق صنعتی." },
+        { icon: Truck, title: "ارسال سراسری", text: "ارسال سریع و مطمئن به سراسر کشور." },
+        { icon: PhoneCall, title: "مشاوره فنی", text: "راهنمایی تخصصی برای انتخاب درست محصول." },
+        { icon: Zap, title: "قیمت رقابتی", text: "عرضه مستقیم با بهترین قیمت بازار." },
+    ]
     return (
         <div className="max-w-4xl mx-auto space-y-10 py-4">
             

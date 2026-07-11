@@ -39,6 +39,7 @@ export interface Product {
     key_features: string[]
     stock_status: StockStatus
     stock_quantity: number | null
+    price: number | null
     created_at: string
     updated_at: string
     brand?: Pick<Brand, "id" | "name" | "slug" | "logo_url"> | null
@@ -112,6 +113,12 @@ function migrate(db: Database.Database) {
             value TEXT NOT NULL DEFAULT ''
         );
     `)
+
+    // افزودن ستون قیمت (اختیاری، تومان) در صورت نبود
+    const productCols = db.prepare("PRAGMA table_info(products)").all() as { name: string }[]
+    if (!productCols.some((c) => c.name === "price")) {
+        db.exec("ALTER TABLE products ADD COLUMN price INTEGER")
+    }
 
     migrateCategories(db)
 }
@@ -211,6 +218,7 @@ type RawProductRow = {
     key_features: string
     stock_status: StockStatus
     stock_quantity: number | null
+    price: number | null
     created_at: string
     updated_at: string
     brand_name?: string | null
@@ -254,6 +262,7 @@ function mapProduct(row: RawProductRow): Product {
         key_features: safeJson<string[]>(row.key_features, []),
         stock_status: row.stock_status,
         stock_quantity: row.stock_quantity,
+        price: row.price ?? null,
         created_at: row.created_at,
         updated_at: row.updated_at,
         brand,
@@ -356,6 +365,7 @@ export interface ProductInput {
     key_features?: string[]
     stock_status?: StockStatus
     stock_quantity?: number | null
+    price?: number | null
 }
 
 export function createProduct(input: ProductInput): string {
@@ -365,9 +375,9 @@ export function createProduct(input: ProductInput): string {
     db.prepare(`
         INSERT INTO products
             (id, title, model_number, description, category_id, brand_id,
-             images, specifications, key_features, stock_status, stock_quantity, created_at, updated_at)
+             images, specifications, key_features, stock_status, stock_quantity, price, created_at, updated_at)
         VALUES (@id,@title,@model_number,@description,@category_id,@brand_id,
-                @images,@specifications,@key_features,@stock_status,@stock_quantity,@created_at,@updated_at)
+                @images,@specifications,@key_features,@stock_status,@stock_quantity,@price,@created_at,@updated_at)
     `).run({
         id,
         title: input.title,
@@ -380,6 +390,7 @@ export function createProduct(input: ProductInput): string {
         key_features: JSON.stringify(input.key_features ?? []),
         stock_status: input.stock_status ?? "in_stock",
         stock_quantity: input.stock_quantity ?? null,
+        price: input.price ?? null,
         created_at: now,
         updated_at: now,
     })
@@ -401,6 +412,7 @@ export function updateProduct(id: string, input: ProductInput): void {
             key_features   = @key_features,
             stock_status   = @stock_status,
             stock_quantity = @stock_quantity,
+            price          = @price,
             updated_at     = @updated_at
         WHERE id = @id
     `).run({
@@ -415,6 +427,7 @@ export function updateProduct(id: string, input: ProductInput): void {
         key_features: JSON.stringify(input.key_features ?? []),
         stock_status: input.stock_status ?? "in_stock",
         stock_quantity: input.stock_quantity ?? null,
+        price: input.price ?? null,
         updated_at: now,
     })
 }

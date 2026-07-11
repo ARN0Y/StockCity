@@ -11,6 +11,7 @@ export interface SiteSettings {
     hours: string
     warrantyBrand: string
     warrantyNote: string
+    footerText: string
     instagram: string
     telegram: string
     announcementEnabled: boolean
@@ -33,8 +34,10 @@ export function getSiteSettings(): SiteSettings {
         address: val("address", siteConfig.address),
         addressShort: val("addressShort", siteConfig.addressShort),
         hours: val("hours", siteConfig.hours),
-        warrantyBrand: val("warrantyBrand", siteConfig.warrantyBrand),
-        warrantyNote: val("warrantyNote", siteConfig.warrantyNote),
+        // با `??` مقدارِ خالیِ ذخیره‌شده (پاک‌شده در پنل) حفظ می‌شود تا بتوان گارانتی را کاملاً حذف کرد
+        warrantyBrand: s["warrantyBrand"] ?? siteConfig.warrantyBrand,
+        warrantyNote: s["warrantyNote"] ?? siteConfig.warrantyNote,
+        footerText: s["footerText"] ?? "",
         instagram: s["instagram"] ?? "",
         telegram: s["telegram"] ?? "",
         announcementEnabled: s["announcementEnabled"] === "1",
