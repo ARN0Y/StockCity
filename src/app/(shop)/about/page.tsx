@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { siteConfig } from "@/lib/site-config"
+import { getSiteSettings } from "@/lib/get-site-settings"
 import {
     ShieldCheck,
     Truck,
@@ -27,6 +28,9 @@ const values = [
 ]
 
 export default function AboutPage() {
+    const { aboutText } = getSiteSettings()
+    const defaultAbout = `${siteConfig.nameFa} (${siteConfig.nameEn}) تأمین‌کننده‌ی تخصصی تجهیزات برق صنعتی و اتوماسیون است. ما با عرضه‌ی انواع کنتاکتور، کلید اتوماتیک و کلید مینیاتوری از برندهای معتبر جهانی، نیاز پیمانکاران، تابلوسازان و صنعتگران را با تضمین اصالت کالا و قیمت رقابتی برطرف می‌کنیم.`
+    const about = aboutText.trim() || defaultAbout
     return (
         <div className="max-w-4xl mx-auto space-y-10 py-4">
             
@@ -39,10 +43,8 @@ export default function AboutPage() {
                             <Zap className="w-4 h-4 text-primary" /> {siteConfig.nameEn}
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black mb-4">درباره {siteConfig.nameFa}</h1>
-                        <p className="text-slate-300 dark:text-muted-foreground leading-8 text-lg max-w-2xl">
-                            {siteConfig.nameFa} ({siteConfig.nameEn}) تأمین‌کننده‌ی تخصصی تجهیزات برق صنعتی و اتوماسیون است.
-                            ما با عرضه‌ی انواع کنتاکتور، کلید اتوماتیک و کلید مینیاتوری از برندهای معتبر جهانی،
-                            نیاز پیمانکاران، تابلوسازان و صنعتگران را با تضمین اصالت کالا و قیمت رقابتی برطرف می‌کنیم.
+                        <p className="text-slate-300 dark:text-muted-foreground leading-8 text-lg max-w-2xl whitespace-pre-line">
+                            {about}
                         </p>
                     </div>
                     <div className="shrink-0 mx-auto md:mx-0">

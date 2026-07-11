@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
 import { saveSiteSettings } from "@/app/actions/settings"
 import { SingleImageField } from "@/components/admin/single-image-field"
-import { Save, Loader2, Megaphone, Phone, MapPin, Share2, ShieldCheck, Wrench } from "lucide-react"
+import { Save, Loader2, Megaphone, Phone, MapPin, Share2, ShieldCheck, Wrench, FileText } from "lucide-react"
 
 const REPAIR_SECTION_TITLES = [
     "تعمیر تخصصی اینورترهای صنعتی",
@@ -48,6 +48,7 @@ export function SettingsForm({ initial }: Props) {
         repairImage2: initial.repairImage2 || "",
         repairImage3: initial.repairImage3 || "",
         repairImage4: initial.repairImage4 || "",
+        aboutText: initial.aboutText || "",
     })
 
     const set = (key: keyof typeof v, value: string | boolean) =>
@@ -194,6 +195,27 @@ export function SettingsForm({ initial }: Props) {
                         <Label>لینک اینستاگرام</Label>
                         <Input value={v.instagram} onChange={(e) => set("instagram", e.target.value)} placeholder="https://instagram.com/..." dir="ltr" className="text-left" />
                     </div>
+                </CardContent>
+            </Card>
+
+            {/* متن صفحه‌ی درباره ما */}
+            <Card>
+                <CardHeader className="pb-3">
+                    <CardTitle className="text-sm font-bold flex items-center gap-2">
+                        <FileText className="w-4 h-4 text-primary" /> متن صفحه‌ی درباره ما
+                    </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                    <Label>متن معرفی</Label>
+                    <Textarea
+                        value={v.aboutText}
+                        onChange={(e) => set("aboutText", e.target.value)}
+                        placeholder="متن معرفی فروشگاه در صفحه‌ی «درباره ما»..."
+                        rows={6}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                        این متن در کادر بالای صفحه‌ی «درباره ما» نمایش داده می‌شود. اگر خالی بماند، متن پیش‌فرض نشان داده می‌شود.
+                    </p>
                 </CardContent>
             </Card>
 

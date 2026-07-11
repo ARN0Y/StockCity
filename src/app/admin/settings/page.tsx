@@ -26,6 +26,7 @@ export default function AdminSettingsPage() {
         repairImage2: saved.repairImage2 ?? "",
         repairImage3: saved.repairImage3 ?? "",
         repairImage4: saved.repairImage4 ?? "",
+        aboutText: saved.aboutText ?? "",
     }
 
     return <SettingsForm initial={initial} />

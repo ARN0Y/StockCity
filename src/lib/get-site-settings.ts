@@ -17,6 +17,7 @@ export interface SiteSettings {
     announcementText: string
     announcementLink: string
     repairImages: string[]
+    aboutText: string
 }
 
 export function getSiteSettings(): SiteSettings {
@@ -40,5 +41,6 @@ export function getSiteSettings(): SiteSettings {
         announcementText: s["announcementText"] ?? "",
         announcementLink: s["announcementLink"] ?? "",
         repairImages: [1, 2, 3, 4].map((n) => s[`repairImage${n}`] ?? ""),
+        aboutText: s["aboutText"] ?? "",
     }
 }
